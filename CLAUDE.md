@@ -1,13 +1,13 @@
-# Job Application Assistant for [YOUR_NAME]
+# Job Application Assistant for Panth Patel
 
 <!-- SETUP: This file is populated by running /setup -->
 <!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
 
 ## Role
-This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
+This repo is a job application workspace. Claude acts as a career advisor and application assistant for Panth Patel, helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
-2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
-3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
+2. **CV tailoring** - Adapt existing HTML CV templates to target specific roles
+3. **Cover letter writing** - Draft targeted cover letters using existing HTML templates
 4. **Interview preparation** - Prepare answers, questions, and talking points for interviews
 5. **Career strategy** - Advise on positioning and personal branding
 
@@ -16,76 +16,82 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 <!-- This section is auto-populated by /setup. You can also fill it in manually. -->
 
 ### Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
-- **Languages:** [YOUR_LANGUAGES]
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
+- **Name:** Panth Patel
+- **Location:** Currently Vadodara, Gujarat, India; relocating to Somerset, NJ, USA within ~2 months. No commute/relocation constraints; job search targets US market.
+- **Languages:** English (fluent), Hindi (fluent), Gujarati (fluent)
+- **Status:** Employed - Software Engineer at Sunflower Labs
+- **LinkedIn headline:** "AI/Python Engineer | LLM Automation (LangChain, AWS Bedrock) | Building AI tools @ Sunflower Labs"
 
 ### Education
 <!-- List your degrees, most recent first -->
-- **[DEGREE_LEVEL] in [FIELD]** ([YEAR_START]-[YEAR_END]) - [INSTITUTION]
-  - Thesis: "[THESIS_TITLE]"
-  - Topics: [KEY_TOPICS]
+- **Post Graduate Diploma in Software Development - AI** (2024-2025) - Algonquin College, Ottawa, ON
+- **Post Graduate Diploma in Project Management** (2023-2024) - Fleming College, Peterborough, ON
+- **Bachelor's in Computer Science and Engineering (CSE)** (2020-2023) - Indus University
+- **Undergraduate Diploma in Computer Science** (2017-2020) - L.J. Polytechnic
 
 ### Professional Experience
 <!-- List your roles, most recent first -->
-- **[JOB_TITLE]** ([START_DATE] - [END_DATE]) - **[COMPANY]** ([LOCATION])
-  - [KEY_RESPONSIBILITY_1]
-  - [KEY_RESPONSIBILITY_2]
-  - [KEY_ACHIEVEMENT]
+- **Software Engineer** (Feb 2026 - Present) - **Sunflower Labs** (Vadodara, India; remote-eligible)
+  - Python developer on the AI team, building AI tools for clients and integrating AI into existing products for AI compliance
+  - Independently developing a tool that converts large IONM machine JSON output into CMS 1500 insurance-claim format, using Python + Amazon Nova v1 Pro on Amazon Bedrock (in progress)
+  - Cut manual claim-entry time from ~1 day/surgery to under 5 minutes; current accuracy 85% and improving
+- **Teacher** (Feb 2023 - Jul 2023) - **Aarham Academy**
+  - Taught math and science to students through 10th grade for 6 months
+- **Core BOD (volunteer leadership)** (Mar 2021 - Jul 2023) - **Rotaract Club of Indus University**
+  - Led CSR initiatives, coordinating with external sponsors, concurrent with undergraduate studies
+- **Python Intern** (Jun 2021 - Aug 2021) - **InfoLabz**
+- **QA Tester** (Aug 2020 - Dec 2020) - **Sunflower Labs** (during break between undergraduate diploma and Bachelor's)
+
+### Independent Projects
+- **Image Color-Pattern Clustering Tool** (Apr 2024 - Sep 2024, freelance): Python + OpenCV clustering tool to identify user-defined color patterns in images. Reached 70% completion before the client discontinued the engagement prior to deployment.
 
 ### Technical Skills
-- **Primary:** [YOUR_PRIMARY_SKILLS]
-- **Secondary:** [YOUR_SECONDARY_SKILLS]
-- **Domain:** [YOUR_DOMAIN_EXPERTISE]
-- **Software:** [YOUR_TOOLS_AND_SOFTWARE]
+- **Primary:** Python (advanced) - LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, OpenCV
+- **Secondary:** JavaScript, SQL, FastAPI; LLM tool/function-calling (in LangGraph)
+- **LLM providers/APIs:** OpenAI, Amazon Bedrock (Amazon Nova v1 Pro), Google AI Studio (multi-provider, comfortable switching models)
+- **Domain:** Adaptable across domains; growing edge in healthcare (IONM data / insurance claims automation)
+- **Software:** VS Code, IntelliJ, AWS (incl. Amazon Bedrock), Docker, Git, DynamoDB, PostgreSQL
 
 ### Certifications
 <!-- List relevant certifications with dates -->
-- **[CERTIFICATION_NAME]** - [HOURS]h - completed [DATE]
+- **Certified Associate in Project Management (CAPM)(R)**
 
 ### Publications
-<!-- List peer-reviewed publications, if any -->
-- [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL].
+None
 
 ### Awards
-<!-- List relevant awards, hackathons, competitions -->
-- [AWARD_NAME] - [EVENT] ([YEAR])
+None
 
 ### Behavioral Profile
 <!-- Your behavioral assessment results (PI, DISC, Myers-Briggs, or self-assessment) -->
-- **[TRAIT_1]** - [DESCRIPTION]
-- **[TRAIT_2]** - [DESCRIPTION]
-- **Strengths:** [YOUR_STRENGTHS]
-- **Growth areas:** [YOUR_GROWTH_AREAS]
-- **Thrives in:** [YOUR_IDEAL_ENVIRONMENT]
+- **DISC: Dominance/Influence (D/I) blend** - assertive, results-oriented, sociable
+- **Strengths:** Decisiveness, initiative, confidence, energizing others, analytical under pressure
+- **Growth areas:** Impatience when decisions stall; benefits from more active listening and deliberate patience
+- **Thrives in:** Dynamic, collaborative environments with authority/strategic control, clear communication, and defined expectations; drained by micromanagement and slow decision-making
 
 ### What Excites You
 <!-- What motivates you professionally -->
-- [PASSION_1]
-- [PASSION_2]
+- New technical challenges - the best opportunity to learn new tech
 
 ### Target Sectors
 <!-- Industries and companies you're targeting -->
-- [SECTOR_1]: [EXAMPLE_COMPANIES]
-- [SECTOR_2]: [EXAMPLE_COMPANIES]
+- Software/AI Engineering: open to any sector, no specific target companies
+- Healthcare-adjacent AI applications (natural fit given current project experience)
 
 ### Deal-breakers
 <!-- Hard constraints on job search -->
-- [DEALBREAKER_1]
-- [DEALBREAKER_2]
+None specified
 
 ## Repo Structure
-- `cv/` - LaTeX CV variants (moderncv template, banking style)
-- `cover_letters/` - LaTeX cover letters (custom cover.cls template)
+- `cv/` - HTML CV variants (rendered to PDF via `tools/render_pdf.py`)
+- `cover_letters/` - HTML cover letters (rendered to PDF via `tools/render_pdf.py`)
 - `.claude/skills/` - AI skill definitions for the application workflow
 - `.agents/skills/` - Job search CLI tools
 
 ## Workflow for New Job Applications
 1. User provides a job posting (URL or text)
 2. **Always evaluate fit first**: skills match, experience match, behavioral/culture match. Present this assessment to the user before proceeding.
-3. If good fit: create targeted CV (`cv/main_<company>.tex`) and cover letter (`cover_letters/cover_<company>_<role>.tex`)
+3. If good fit: create targeted CV (`cv/main_<company>.html`) and cover letter (`cover_letters/cover_<company>_<role>.html`)
 4. **Verify both documents** (see Verification Checklist below)
 5. Prepare interview talking points based on the role requirements and your strengths
 
@@ -107,25 +113,25 @@ After creating or updating a CV or cover letter, re-read the generated file and 
 - [ ] Nice-to-have requirements are highlighted where there is a match
 
 ### Consistency
-- [ ] CV follows the standard 2-page moderncv/banking format
-- [ ] Cover letter uses cover.cls template and established structure
+- [ ] CV follows the standard 2-page HTML format
+- [ ] Cover letter follows the established HTML template structure
 - [ ] Tone is consistent across CV and cover letter
 - [ ] No contradictions between CV and cover letter content
 
 ### Quality
-- [ ] No LaTeX syntax errors (balanced braces, correct commands)
+- [ ] No HTML syntax errors (balanced tags, and only CSS the renderer supports)
 - [ ] No spelling or grammar errors
 - [ ] Agentic coding / AI tooling references mention **Claude Code** by name
 - [ ] Cover letter is addressed to the correct person (or "Dear Hiring Manager" if unknown)
 - [ ] Cover letter fits approximately one page
 
 ### Compiled PDF verification (MANDATORY - never skip)
-Both documents MUST be compiled and visually inspected via the Read tool on the PDF output. "Looks fine in the .tex" is not acceptable - LaTeX page-break decisions are unpredictable. Iterate until these all pass:
-- [ ] CV compiled with **lualatex** (pdflatex often fails on modern MiKTeX with fontawesome5 font-expansion errors). Cover letter compiled with **xelatex** (cover.cls requires fontspec).
+Both documents MUST be rendered to PDF and visually inspected via the Read tool on the PDF output. "Looks fine in the .html" is not acceptable - PDF page-break decisions are unpredictable. Iterate until these all pass:
+- [ ] CV and cover letter rendered with `python tools/render_pdf.py <file>.html` (xhtml2pdf, pure Python, no TeX). The `.pdf` is written alongside the `.html`.
 - [ ] **CV is exactly 2 pages** - not 1, not 3
-- [ ] **No orphaned `\cventry` titles** - a job/education title must never sit at the bottom of a page with its bullets spilling to the next page. Use `\needspace{5\baselineskip}` before each `\cventry` to prevent this, and `\enlargethispage{2-3\baselineskip}` to rescue a trailing section that just barely spills
+- [ ] **No orphaned entry titles** - a job/education title must never sit at the bottom of a page with its bullets spilling to the next page. Keep each role's `.entry` block together; add `page-break-inside: avoid;` to the `.entry` CSS if a break lands awkwardly, and cut low-relevance content to rescue a trailing section that just barely spills
 - [ ] **Cover letter is exactly 1 page** - signature block must fit with the body, never overflow
-- [ ] **Cover letter bullet font matches body font** - `\lettercontent{}` must not wrap `\begin{itemize}...\end{itemize}` (the command's trailing `\\` errors on `\end{itemize}`, and moving itemize outside loses the Raleway font). Standard pattern: close `\lettercontent{}`, then wrap the list in `{\raggedright\fontspec[Path = OpenFonts/fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{13pt}\selectfont \begin{itemize}...\end{itemize}\par}`
+- [ ] **Cover letter fits on one page** with the signature block - trim body content (target 250-300 words) rather than shrinking margins or line-height. The bullet list inherits the body font automatically, so there is no font-mismatch pitfall
 
 ### ATS & keyword verification (CV)
 ATS parsers read the PDF's embedded text layer, not the rendered page. Extract it with `pdftotext -layout` and verify what a parser sees. `pdftotext` (poppler) is optional - if missing, skip the parseability items with a warning and check keyword coverage from the visual PDF read instead.

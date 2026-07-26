@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+  Example cover letter template (HTML -> PDF via tools/render_pdf.py).
+  Tracked master reference. /setup fills the [PLACEHOLDER] tokens; /apply copies
+  this into cover_letters/cover_<company>_<role>.html and tailors it per role.
+  Keep the [PLACEHOLDER] tokens - never commit personal data here.
+
+  Render:  python tools/render_pdf.py cover_letters/cover_example.html
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@page { size: letter; margin: 1.7cm 1.8cm; }
+body { font-family: Helvetica, Arial, sans-serif; font-size: 10.5pt; color: #222; line-height: 1.4; }
+h1 { color: #2b6cb0; font-size: 22pt; margin: 0 0 2pt 0; }
+.contact { font-size: 9.5pt; color: #444; margin-bottom: 4pt; }
+.contact a { color: #2b6cb0; text-decoration: none; }
+.rule { border-bottom: 1.2pt solid #2b6cb0; margin-bottom: 12pt; }
+.date { color: #555; margin-bottom: 12pt; font-size: 9.5pt; }
+p { margin: 0 0 9pt 0; text-align: justify; }
+ul { margin: 0 0 9pt 0; padding-left: 16pt; }
+li { margin-bottom: 3pt; text-align: left; }
+.label { font-weight: bold; }
+.sig { margin-top: 14pt; }
+</style>
+</head>
+<body>
+
+<h1>[YOUR NAME]</h1>
+<div class="contact"><a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a> &nbsp;|&nbsp; <a href="[YOUR_LINKEDIN_URL]">LinkedIn</a></div>
+<div class="rule"></div>
+
+<div class="date">[DATE]</div>
+
+<p>Dear [Hiring Manager / named person],</p>
+
+<p>[Opening: the role you are applying for and your single strongest, concrete connection to it. Lead with an achievement, not "I am early in my career". 2-3 sentences.]</p>
+
+<p>[Body: the most relevant experience for this role, framed as what you will solve for them. Then the bullets:]</p>
+
+<ul>
+<li><span class="label">[Label]:</span> [Concrete, outcome-oriented achievement 1.]</li>
+<li><span class="label">[Label]:</span> [Achievement 2, with a number where possible.]</li>
+<li><span class="label">[Label]:</span> [Achievement 3.]</li>
+</ul>
+
+<p>[Why this company specifically: use a verified fact about them. Acknowledge any genuine stack/skill gap honestly and confidently, framing the ramp. Mention Claude Code by name if you reference AI coding tools.]</p>
+
+<p>[Personal fit: behavioral strengths, how you work, 2-3 sentences.]</p>
+
+<p>I look forward to hearing from you.</p>
+
+<p class="sig">Kind regards,<br>[YOUR NAME]</p>
+
+</body>
+</html>

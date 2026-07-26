@@ -8,7 +8,7 @@ Follow these steps **exactly in order**. Do not skip steps.
 - Never re-Read a file whose contents are already in your context from an earlier step. If you read it in Step 1, it is still available in Step 2.
 - When dispatching the reviewer agent, pass draft content **inline in the agent prompt** rather than asking the agent to Read files you already have in memory.
 - Run the full verification checklist exactly once, at the end (Step 6). The reviewer focuses on content critique, not verification.
-- Step 5 (compile and inspect PDFs) is mandatory and non-skippable — LaTeX page-break decisions are unpredictable, and `.tex` files that look fine often produce broken PDFs (orphaned entry titles, cover letters spilling to page 2, bullet fonts mismatching).
+- Step 5 (render and inspect PDFs) is mandatory and non-skippable — PDF page-break decisions are unpredictable, and `.html` files that look fine often produce broken PDFs (orphaned entry titles, cover letters spilling to page 2).
 
 ---
 
@@ -63,17 +63,16 @@ Also read the most recent existing CV and cover letter files for concrete struct
 - Read any existing `cv/main_*.tex` file as a LaTeX template reference
 - Read any existing `cover_letters/cover_*.tex` or `cover_letters/Cover_*.tex` file as a template reference
 
-### CV (`cv/main_<company>.tex`)
+### CV (`cv/main_<company>.html`)
 - Always in **English**
-- Follow the moderncv/banking format from `05-cv-templates.md`
+- Follow the HTML/CSS structure from `05-cv-templates.md`
 - Tailor the profile statement and experience bullets to the specific role
 - Reframe skills and achievements to match job requirements
 - Keep to 2 pages
 
-### Cover Letter (`cover_letters/cover_<company>_<role>.tex`)
+### Cover Letter (`cover_letters/cover_<company>_<role>.html`)
 - **Match the language of the job posting** (Danish posting -> Danish cover letter, English posting -> English cover letter)
 - Follow the structure from `06-cover-letter-templates.md`
-- Use the `cover.cls` template
 - Tailor the opening paragraph to the specific role and company
 - Address to a named person if available in the posting, otherwise "Dear Hiring Manager" (or equivalent in posting language)
 - Keep to approximately one page
@@ -85,7 +84,7 @@ Write both files to disk. Keep the exact text of both drafts in working memory �
 
 ## Step 3: REVIEWER - Research & Critique
 
-Use the **Agent tool** to spawn a `general-purpose` reviewer agent. The reviewer gets a fresh context, so pass the drafts **inline in the prompt** below (do not make the reviewer Read them). Scope the reviewer's file reads to content-critique essentials only — the reviewer does not need the LaTeX template files (`05`, `06`) to critique content, since those govern structural/LaTeX concerns the drafter already applied.
+Use the **Agent tool** to spawn a `general-purpose` reviewer agent. The reviewer gets a fresh context, so pass the drafts **inline in the prompt** below (do not make the reviewer Read them). Scope the reviewer's file reads to content-critique essentials only — the reviewer does not need the HTML template files (`05`, `06`) to critique content, since those govern structural concerns the drafter already applied.
 
 Replace `<COMPANY>`, `<ROLE>`, `<INSERT_JOB_POSTING_TEXT_HERE>`, `<INSERT_CV_DRAFT_HERE>`, and `<INSERT_COVER_LETTER_DRAFT_HERE>` with actual values before dispatching.
 
@@ -108,16 +107,16 @@ Read these four files — and only these — to ground your critique:
 - `.claude/skills/job-application-assistant/03-writing-style.md`
 - `.claude/skills/job-application-assistant/04-job-evaluation.md`
 
-Do NOT read `05-cv-templates.md` or `06-cover-letter-templates.md` — those govern LaTeX structure the drafter already applied and are not needed for content critique.
+Do NOT read `05-cv-templates.md` or `06-cover-letter-templates.md` — those govern HTML structure the drafter already applied and are not needed for content critique.
 
 ### 3. Drafts to Review
 Both drafts are provided inline below. Do NOT use the Read tool on the draft files — use these exact texts.
 
-<CV_DRAFT file="cv/main_<COMPANY>.tex">
+<CV_DRAFT file="cv/main_<COMPANY>.html">
 <INSERT_CV_DRAFT_HERE>
 </CV_DRAFT>
 
-<COVER_LETTER_DRAFT file="cover_letters/cover_<COMPANY>_<ROLE>.tex">
+<COVER_LETTER_DRAFT file="cover_letters/cover_<COMPANY>_<ROLE>.html">
 <INSERT_COVER_LETTER_DRAFT_HERE>
 </COVER_LETTER_DRAFT>
 
@@ -134,7 +133,7 @@ Return your feedback in **two parts**:
 A JSON array of concrete edits the drafter can apply directly without re-reading the files. Each edit is an object:
 ```json
 {
-  "file": "cv/main_<COMPANY>.tex" | "cover_letters/cover_<COMPANY>_<ROLE>.tex",
+  "file": "cv/main_<COMPANY>.html" | "cover_letters/cover_<COMPANY>_<ROLE>.html",
   "old_string": "<exact text currently in the draft>",
   "new_string": "<replacement text>",
   "reason": "<one-line rationale: keyword match / company angle / reframing / style>"

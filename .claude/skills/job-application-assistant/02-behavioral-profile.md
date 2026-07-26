@@ -4,47 +4,50 @@
 <!-- You can use results from PI, DISC, Myers-Briggs, StrengthsFinder, or a self-assessment -->
 
 ## Overview
-[YOUR_NAME]'s behavioral assessment identifies them as a **[PROFILE_TYPE]** pattern. [1-2 SENTENCE_SUMMARY].
+Panth's behavioral assessment (DISC) identifies him as a **Dominance/Influence (D/I)** pattern - primary Dominance, secondary Influence, with Steadiness and Conscientiousness expressed at a lower level. He is assertive, results-oriented, and sociable, while also valuing clarity and structure in his work.
 
 ## Core Behavioral Drives
 
 | Drive | Level | Meaning |
 |-------|-------|---------|
-| [DRIVE_1] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_2] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_3] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_4] | [LEVEL] | [DESCRIPTION] |
+| Dominance | High (primary) | Decisive, assertive, prefers to take charge, energized by competition and ambitious goals |
+| Influence | High (secondary) | Sociable, expressive, enjoys building rapport, persuasive, direct and warm communicator |
+| Steadiness | Lower | Values stability, trust, and positive communication, but not tied to rigid routine |
+| Conscientiousness | Lower | Values accuracy and quality, but not excessively detail-oriented or rigid |
 
 ## Strongest Behaviors
-- **[BEHAVIOR_1]:** [DESCRIPTION]
-- **[BEHAVIOR_2]:** [DESCRIPTION]
-- **[BEHAVIOR_3]:** [DESCRIPTION]
+- **Decisiveness:** Makes decisions quickly, relying on instinct and available information; prefers evidence-based decisions in high-stakes situations
+- **Directness:** Confronts issues directly rather than avoiding them; prefers calm conversation but addresses conflict head-on when it arises
+- **Energizing others:** Builds rapport and creates energy in group settings; enthusiastic and appreciates positive feedback
 
 ## How You Work Best
-- [ENVIRONMENT_PREFERENCE_1]
-- [ENVIRONMENT_PREFERENCE_2]
-- [ENVIRONMENT_PREFERENCE_3]
+- Dynamic, collaborative environments with social energy
+- Roles that grant authority and strategic control
+- Clear communication and defined expectations
+- Environments with room for leadership and flexibility while maintaining high standards
 
 ## Growth Areas (frame positively in applications)
-- **[AREA_1]:** [HOW_TO_FRAME_IT_POSITIVELY]
-- **[AREA_2]:** [HOW_TO_FRAME_IT_POSITIVELY]
+- **Impatience with delay:** Frame as a bias toward action and momentum - "I move quickly to unblock a team when a decision is stalling progress."
+- **Overused assertiveness:** Frame as strong ownership - "I take direct responsibility for outcomes rather than waiting for consensus," while noting active listening as a practiced complement.
 
 ## Mapping to Job Posting Language
 
 When a job posting mentions these keywords, it's a **strong behavioral fit**:
-- [KEYWORD_OR_PHRASE_THAT_MATCHES_YOUR_STYLE]
-- [ANOTHER_KEYWORD]
+- "fast-paced", "ownership", "autonomy", "cross-functional collaboration"
+- "results-driven", "leadership opportunity", "clear goals/KPIs"
+- "team environment", "client-facing", "growth mindset"
 
 When a job posting mentions these, flag as **potential friction** (not deal-breaker):
-- [KEYWORD_OR_PHRASE_THAT_MIGHT_CLASH]
-- [ANOTHER_KEYWORD]
+- "highly process-driven, slow-moving approvals"
+- "heavy solo/isolated work with minimal team interaction"
+- "rigid micromanagement culture"
 
 ## Management Style Preferences
-- [WHAT_MANAGEMENT_STYLE_WORKS_FOR_YOU]
-- [WHAT_DOESN'T_WORK]
+- Works best with: clear objectives, autonomy to execute, direct feedback, managers who set direction and get out of the way
+- Doesn't work well with: micromanagement, slow/unclear decision-making, environments lacking human interaction
 
 ## Using This in Applications
-- **Cover letters:** [HOW_TO_WEAVE_IN_BEHAVIORAL_STRENGTHS]
-- **CV:** [WHAT_TO_EMPHASIZE]
-- **Interviews:** [WHAT_STAR_EXAMPLES_TO_USE]
-- **Don't overstate:** [WHAT_NOT_TO_CLAIM]
+- **Cover letters:** Weave in initiative and ownership - e.g., independently driving the IONM-to-CMS1500 AI tool from concept through development
+- **CV:** Emphasize measurable results, ownership of projects end-to-end, and cross-functional/client-facing work
+- **Interviews:** Use the IONM automation project as the anchor STAR example for initiative, ownership, and results
+- **Don't overstate:** Avoid implying formal team-leadership experience not yet held; frame as "led initiative" or "drove independently," not "managed a team"

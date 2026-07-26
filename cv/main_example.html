@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+  Example CV template (HTML -> PDF via tools/render_pdf.py).
+  This is the tracked master reference. /setup fills the [PLACEHOLDER] tokens
+  with real data; /apply copies this structure into cv/main_<company>.html and
+  tailors it per role. Keep the [PLACEHOLDER] tokens in this file - never commit
+  personal data here (the placeholder-integrity CI check enforces this).
+
+  Render:  python tools/render_pdf.py cv/main_example.html
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@page { size: letter; margin: 1.5cm 1.6cm; }
+body { font-family: Helvetica, Arial, sans-serif; font-size: 10pt; color: #222; line-height: 1.34; }
+h1 { color: #2b6cb0; font-size: 24pt; margin: 0 0 2pt 0; letter-spacing: 0.5pt; }
+.contact { font-size: 9.5pt; color: #444; margin-bottom: 10pt; }
+.contact a { color: #2b6cb0; text-decoration: none; }
+.summary { margin: 0 0 12pt 0; text-align: justify; }
+h2 { color: #2b6cb0; font-size: 12pt; border-bottom: 1.2pt solid #2b6cb0; padding-bottom: 2pt; margin: 12pt 0 6pt 0; }
+.entry { margin-bottom: 8pt; }
+.entryhead { width: 100%; }
+.entryhead td { vertical-align: top; padding: 0; }
+.role { font-weight: bold; font-size: 10.5pt; }
+.org { font-style: italic; color: #333; }
+.right { text-align: right; color: #555; white-space: nowrap; font-size: 9.5pt; }
+ul { margin: 3pt 0 0 0; padding-left: 15pt; }
+li { margin-bottom: 2pt; }
+.comp li { margin-bottom: 3pt; }
+.label { font-weight: bold; }
+p { margin: 0; }
+</style>
+</head>
+<body>
+
+<h1>[YOUR_NAME]</h1>
+<div class="contact">[YOUR_LOCATION] &nbsp;&bull;&nbsp; <a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a> &nbsp;&bull;&nbsp; <a href="[YOUR_LINKEDIN_URL]">[YOUR_LINKEDIN_HANDLE]</a></div>
+
+<p class="summary">[PROFILE_STATEMENT - 3-4 lines, tailored per role: what you build, the tools you use, and one measurable result. This is the most important section to customize for each application.]</p>
+
+<h2>Core Competencies</h2>
+<ul class="comp">
+<li><span class="label">[COMPETENCY_1]:</span> [1-2 lines, tailored to the posting's keywords.]</li>
+<li><span class="label">[COMPETENCY_2]:</span> [1-2 lines.]</li>
+<li><span class="label">[COMPETENCY_3]:</span> [1-2 lines.]</li>
+<li><span class="label">[COMPETENCY_4]:</span> [1-2 lines.]</li>
+<li><span class="label">[COMPETENCY_5]:</span> [1-2 lines.]</li>
+</ul>
+
+<h2>Professional Experience</h2>
+
+<div class="entry">
+<table class="entryhead"><tr>
+<td><span class="role">[ROLE_TITLE]</span>, <span class="org">[ORGANIZATION]</span></td>
+<td class="right">[LOCATION]<br>[START]&ndash;[END]</td>
+</tr></table>
+<ul>
+<li>[Most recent role: 4-5 bullets, measurable results, reframed to the target role.]</li>
+<li>[Bullet 2]</li>
+<li>[Bullet 3]</li>
+<li>[Bullet 4]</li>
+</ul>
+</div>
+
+<div class="entry">
+<table class="entryhead"><tr>
+<td><span class="role">[ROLE_TITLE]</span>, <span class="org">[ORGANIZATION]</span></td>
+<td class="right">[LOCATION]<br>[START]&ndash;[END]</td>
+</tr></table>
+<ul><li>[Previous role: 2-3 bullets.]</li></ul>
+</div>
+
+<h2>Education</h2>
+<div class="entry"><table class="entryhead"><tr><td><span class="role">[DEGREE]</span>, <span class="org">[INSTITUTION]</span></td><td class="right">[LOCATION]<br>[START]&ndash;[END]</td></tr></table></div>
+
+<h2>Certifications</h2>
+<ul><li>[CERTIFICATION, or remove this section]</li></ul>
+
+<h2>Languages</h2>
+<ul><li>[LANGUAGES]</li></ul>
+
+<h2>References</h2>
+<ul><li>Available upon request.</li></ul>
+
+</body>
+</html>

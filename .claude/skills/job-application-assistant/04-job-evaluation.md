@@ -16,9 +16,9 @@ How well do the required/preferred skills align with the candidate's capabilitie
 | 40-59 | Partial match, significant upskilling needed |
 | 0-39 | Fundamental mismatch |
 
-**Strong match areas:** [YOUR_PRIMARY_SKILLS]
-**Moderate match areas:** [YOUR_SECONDARY_SKILLS]
-**Weak match areas:** [SKILLS_YOU_LACK]
+**Strong match areas:** Python (advanced), LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, prompt engineering, AI-compliance engineering, AWS/Amazon Bedrock
+**Moderate match areas:** JavaScript, SQL, backend development, full-stack development, Docker, DynamoDB, PostgreSQL, project management (CAPM)
+**Weak match areas:** Formal team leadership/management experience, non-Python backend stacks, frontend frameworks (not yet demonstrated)
 
 ### 2. Experience Match (0-100)
 Does work history align with what they're looking for?
@@ -30,9 +30,9 @@ Does work history align with what they're looking for?
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** [YOUR_DIRECT_EXPERIENCE_DOMAINS]
-**Moderate:** [YOUR_ADJACENT_EXPERIENCE]
-**Entry-level:** [ROLES_WITH_LIMITED_EXPERIENCE]
+**Strong:** Python/AI development in a production team setting, building AI tools that integrate into client-facing products
+**Moderate:** QA testing, project management, technical tutoring (communication of complex concepts)
+**Entry-level:** Backend engineering and full-stack engineering roles (skills present, limited role-specific title history)
 
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?
@@ -63,19 +63,19 @@ Does this role advance career goals and contain tasks that energize?
 | 0-39 | Dead end or backwards step |
 
 **Career goals:**
-- [YOUR_CAREER_GOAL_1]
-- [YOUR_CAREER_GOAL_2]
-- [YOUR_CAREER_GOAL_3]
+- Grow as a Software Engineer / AI Engineer working with Python and applied AI
+- Take on backend and full-stack engineering scope alongside AI work
+- Build toward roles with more ownership and technical depth over time
 
 **Motivation filter:** Evaluate not just whether you *can* do the tasks, but whether the tasks will *energize* you. Consider:
-- Tasks that energize: [YOUR_ENERGIZING_TASKS]
-- Tasks that drain: [YOUR_DRAINING_TASKS]
-- Non-task factors: leadership style, department culture, company values, degree of autonomy
+- Tasks that energize: New technical challenges, learning new tools/frameworks, building AI systems end-to-end
+- Tasks that drain: Not yet identified - no reported drains at this stage
+- Non-task factors: Autonomy, clear objectives, dynamic/collaborative team environment (per DISC D/I profile - see 02-behavioral-profile.md)
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: [YOUR_FINANCIAL_SITUATION_CONTEXT]
-- **Flexibility**: [YOUR_SCHEDULE_CONSTRAINTS]
-- **Professional development**: [YOUR_GROWTH_PRIORITIES]
+- **Security**: Currently employed; salary baseline of $75-80K/year for a move
+- **Flexibility**: No location, commute, or relocation constraints
+- **Professional development**: Prioritizes continuous learning of new technologies
 
 ### 6. Salary Benchmark (Optional)
 

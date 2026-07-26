@@ -10,35 +10,50 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 
 ## Ready-Made STAR Examples
 
-<!-- These are populated by /setup from your actual experience. Below are templates showing the format. -->
+<!-- These are populated by /setup from your actual experience. -->
 
-### 1. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT - what was happening, what was the problem]
-**T:** [YOUR RESPONSIBILITY - what you specifically needed to do]
-**A:** [WHAT YOU DID - specific actions, tools, methods]
-**R:** [OUTCOME - measurable results, adoption, impact]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### 1. IONM-to-CMS1500 AI Automation Tool (Applied AI / Ownership)
+**S:** At Sunflower Labs, manually converting large IONM (intraoperative neuromonitoring) machine JSON output into CMS 1500 insurance-claim format took an operator roughly a full day per surgery.
+**T:** Independently design and build an AI tool to automate this conversion so claims could be submitted faster and with less manual labor.
+**A:** Built the pipeline in Python using Amazon Nova v1 Pro on Amazon Bedrock to parse and map the IONM JSON output into structured CMS 1500 fields; iterated on prompt design and validation logic to raise extraction accuracy.
+**R:** Cut processing time from about a day per surgery to under 5 minutes, with accuracy currently at 85% and improving as development continues (project is ongoing).
+**Use for:** "Tell me about a project you're proud of", "Describe a time you worked independently", "How do you approach an ambiguous technical problem?"
 
-### 2. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT]
-**T:** [YOUR RESPONSIBILITY]
-**A:** [WHAT YOU DID]
-**R:** [OUTCOME]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### 2. QA Testing at Sunflower Labs (STAR stub - complete manually)
+**Source:** QA Tester role, Sunflower Labs, Aug-Dec 2020
+**What happened:** Worked as a QA tester during a break between undergraduate diploma and Bachelor's degree
+**Why it matters:** Could answer questions about attention to detail, process/testing rigor, or working in a professional environment early in your career
+**S/T/A/R stub:**
+- Situation:
+- Task:
+- Action:
+- Result:
 
-### 3. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT]
-**T:** [YOUR RESPONSIBILITY]
-**A:** [WHAT YOU DID]
-**R:** [OUTCOME]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### 3. Math & Science Tutoring (STAR stub - complete manually)
+**Source:** Freelance tutor, final semester of Bachelor's (~2023), taught math/science through 10th grade for ~6 months
+**Why it matters:** Could answer questions about communication, breaking down complex topics, teamwork/mentoring, or managing time alongside a full course load
+**S/T/A/R stub:**
+- Situation:
+- Task:
+- Action:
+- Result:
 
-<!-- Add more STAR examples as needed. Aim for 4-6 covering different competencies. -->
+### 4. Python Internship at InfoLabz (STAR stub - complete manually)
+**Source:** Python Intern, InfoLabz, Jun-Aug 2021
+**What happened:** Two-month Python development internship
+**Why it matters:** Could answer questions about ramping up quickly in a new codebase/team, or early technical growth
+**S/T/A/R stub:**
+- Situation:
+- Task:
+- Action:
+- Result:
+
+<!-- Add more STAR examples as needed. Aim for 4-6 covering different competencies. Flesh out the stubs above with real details before relying on them in an interview. -->
 
 ## Common Tough Questions
 
 ### "Why did you leave [previous company]?"
-> [PREPARE YOUR ANSWER - be honest, forward-looking, no negativity about former employer]
+> Currently employed at Sunflower Labs. If asked why looking to move: frame around seeking broader software engineering scope (backend/full-stack) alongside AI work, and a new set of technical challenges to learn from - not dissatisfaction with the current role. Tailor per company.
 
 ### "You don't have [specific skill/experience]."
 > [PREPARE YOUR ANSWER - acknowledge the gap, bridge to adjacent experience, show willingness to learn]
@@ -47,7 +62,7 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 > [PREPARE YOUR ANSWER - show ambition aligned with the role's growth path]
 
 ### "What's your biggest weakness?"
-> [PREPARE YOUR ANSWER - genuine weakness with concrete mitigation strategy]
+> Per DISC assessment: tendency toward impatience when decisions stall or processes move slowly. Mitigation: actively practicing patience and inviting others' input before pushing for a decision - e.g., explicitly asking for concerns before moving forward rather than assuming alignment.
 
 ### "Why this company specifically?"
 > Customize per company. Must reference: specific projects, company values, market position, or team structure. Never give a generic answer.

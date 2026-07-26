@@ -19,14 +19,14 @@ You'll need an Anthropic API key or a Claude Pro/Team subscription. See the [Cla
 Python 3.10+ is required for the salary lookup tool. Check with:
 
 ```bash
-python --version
+python3 --version
 ```
 
-On Windows, `py --version` is often the most reliable check if `python` is not on your PATH.
+On Windows, `py --version` is often the most reliable check. If your system exposes Python as `python` instead of `python3`, use `python` in the commands below.
 
 ### Bun (for job search tools)
 
-The job portal CLIs (four Danish portals plus the country-agnostic LinkedIn tool) are written in TypeScript and run with Bun.
+The job portal CLIs (four Danish portals plus the country-agnostic `linkedin-search` and `freehire-search` tools) are written in TypeScript and run with Bun.
 
 - macOS/Linux:
 
@@ -51,6 +51,51 @@ Install a LaTeX distribution to compile the generated `.tex` files to PDF:
 - **Linux:** `sudo apt install texlive-full` or `sudo dnf install texlive-scheme-full`
 
 The CV compiles with `lualatex` (pdflatex often fails on modern MiKTeX installs with `fontawesome5` font-expansion errors). The cover letter compiles with `xelatex` because `cover.cls` requires `fontspec` for its custom Lato/Raleway fonts.
+
+#### Minimal TeX install: TinyTeX/BasicTeX
+
+Full TeX distributions work out of the box, but minimal distributions need a few extra packages before the stock templates compile.
+
+On macOS, a user-level TinyTeX install avoids a system-wide installer and does not require `sudo`:
+
+```bash
+curl -fsSL https://yihui.org/tinytex/install-bin-unix.sh -o /tmp/tinytex-install-bin-unix.sh
+sh /tmp/tinytex-install-bin-unix.sh /tmp --no-path
+export PATH="$HOME/Library/TinyTeX/bin/universal-darwin:$PATH"
+```
+
+Then install the template dependencies:
+
+```bash
+tlmgr install \
+  moderncv fontawesome5 fontawesome6 academicons import luatexbase pgf \
+  titlesec textpos xltxtra xunicode cite realscripts
+```
+
+For BasicTeX/MacTeX, make sure the TeX binary directory is on `PATH` first (for example via `/Library/TeX/texbin`), then run the same `tlmgr install ...` command.
+
+Quick smoke tests after setup:
+
+```bash
+cd cv && lualatex -interaction=nonstopmode -halt-on-error main_example.tex && cd ..
+
+SMOKE_DIR="$(mktemp -d /tmp/ai-job-cover-smoke.XXXXXX)"
+cp -R cover_letters/cover.cls cover_letters/OpenFonts "$SMOKE_DIR/"
+cat >"$SMOKE_DIR/cover_smoke.tex" <<'EOF'
+\documentclass[]{cover}
+\begin{document}
+\namesection{Test}{Candidate}{test@example.com}
+\companyname{Example Company}
+\companyaddress{123 Hiring Street\\Example City}
+\currentdate{\today}
+\lettercontent{Dear Hiring Manager,}
+\lettercontent{This smoke test verifies that xelatex can load cover.cls and the bundled fonts.}
+\closing{Sincerely,}
+\signature{Test Candidate}
+\end{document}
+EOF
+(cd "$SMOKE_DIR" && xelatex -interaction=nonstopmode -halt-on-error cover_smoke.tex)
+```
 
 ### Optional: pdftotext (for the ATS check)
 
@@ -77,7 +122,7 @@ Run these from the repository root.
 - PowerShell:
 
 ```powershell
-$tools = @("jobbank-search", "jobdanmark-search", "jobindex-search", "jobnet-search", "linkedin-search")
+$tools = @("jobbank-search", "jobdanmark-search", "jobindex-search", "jobnet-search", "linkedin-search", "freehire-search")
 foreach ($tool in $tools) {
   Set-Location ".agents/skills/$tool/cli"
   bun install
@@ -87,12 +132,12 @@ foreach ($tool in $tools) {
 
 - Bash / zsh / Git Bash:
 ```bash
-for tool in jobbank-search jobdanmark-search jobindex-search jobnet-search linkedin-search; do
+for tool in jobbank-search jobdanmark-search jobindex-search jobnet-search linkedin-search freehire-search; do
   cd .agents/skills/$tool/cli && bun install && cd ../../../..
 done
 ```
 
-For `linkedin-search` the install is optional: it has zero runtime dependencies and runs with plain `bun`; `bun install` only pulls TypeScript dev types.
+For `linkedin-search` and `freehire-search` the install is optional: both have zero runtime dependencies and run with plain `bun`; `bun install` only pulls TypeScript dev types.
 
 If you're outside Denmark, you can generate an equivalent search skill for your local job board with `/add-portal` — it scaffolds the same CLI structure for any public portal and test-runs a live query before registering. See the "Job search tools" section in the README.
 
@@ -151,7 +196,7 @@ If you have salary data (from a union, salary survey, Glassdoor, or personal res
 2. **Option B:** Convert from Excel:
    ```bash
    pip install openpyxl
-   python tools/convert_salary_excel.py path/to/salary-data.xlsx --source "My Salary Data 2025"
+   python3 tools/convert_salary_excel.py path/to/salary-data.xlsx --source "My Salary Data 2025"
    ```
 
 This creates `salary_data.json` which the `/apply` workflow uses for salary benchmarking. If you skip this step, salary lookup is simply omitted.
@@ -212,7 +257,7 @@ Make sure Bun is installed and you ran `bun install` in each CLI directory. The 
 The cover letter template expects fonts in `cover_letters/OpenFonts/fonts/`. Make sure this directory exists and contains the Lato and Raleway font files.
 
 ### Stale `.claude/settings.local.json` from an older clone
-Shared Claude Code permissions now live in `.claude/settings.json` (scoped to `bun run` and `python salary_lookup.py`). Earlier versions of this repo committed a broader `.claude/settings.local.json` that pre-approved `Bash(curl:*)`, `Bash(python:*)` and `Bash(bun:*)`. If you cloned before that change, git leaves the old file behind in your working copy, and its permissions still apply on top of `settings.json`. Delete it (or trim it to your own personal overrides):
+Shared Claude Code permissions now live in `.claude/settings.json` (scoped to `bun run`, `python salary_lookup.py`, and `python3 salary_lookup.py`). Earlier versions of this repo committed a broader `.claude/settings.local.json` that pre-approved `Bash(curl:*)`, `Bash(python:*)` and `Bash(bun:*)`. If you cloned before that change, git leaves the old file behind in your working copy, and its permissions still apply on top of `settings.json`. Delete it (or trim it to your own personal overrides):
 
 ```bash
 rm .claude/settings.local.json
