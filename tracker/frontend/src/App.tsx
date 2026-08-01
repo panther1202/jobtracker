@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import * as api from "./api";
 import Lane from "./Lane";
 import type { Board } from "./types";
+import { CLOSED_DROP } from "./types";
 
 export default function App() {
   const [board, setBoard] = useState<Board | null>(null);
@@ -21,8 +22,18 @@ export default function App() {
     p.then(setBoard).catch((e) => setError(String(e.message ?? e)));
 
   const handlers = {
-    onAppStatus: (id: string, status: string) =>
-      run(api.patchApplication(id, { status })),
+    onAppStatus: (id: string, status: string) => {
+      let s = status;
+      if (s === CLOSED_DROP) {
+        const choice = window.prompt(
+          "Close as which status?\nhired / rejected / no response / withdrawn / offer declined",
+          "rejected",
+        );
+        if (!choice) return;
+        s = choice.trim().toLowerCase();
+      }
+      return run(api.patchApplication(id, { status: s }));
+    },
     onAppNotes: (id: string, notes: string) =>
       run(api.patchApplication(id, { notes })),
     onLeadStatus: (url: string, status: string) => run(api.patchLead(url, status)),

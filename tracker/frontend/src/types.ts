@@ -69,10 +69,13 @@ export const CSV_STATUSES = [
 
 export const SEEN_STATUSES = ["new", "evaluated", "ranked", "skipped", "expired"];
 
-// Lanes that accept a dropped application card (unambiguous single status).
-// "closed" is reached via the status <select> because it maps to several values.
+// Lanes that accept a dropped application card. applied/interview/offer map to a
+// single status; "closed" maps to several outcomes, so it drops with a sentinel
+// that App resolves by prompting for the specific closing status.
+export const CLOSED_DROP = "__pick_closed__";
 export const DROP_LANES: Record<string, string> = {
   applied: "applied",
   interview: "interview",
   offer: "offer",
+  closed: CLOSED_DROP,
 };

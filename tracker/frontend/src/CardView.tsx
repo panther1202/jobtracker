@@ -115,6 +115,12 @@ export default function CardView({
               </label>
               <p className="hint">
                 To apply, run <code>/apply {card.url}</code> in Claude, then <code>/outcome</code> to log it.
+                <button
+                  className="link"
+                  onClick={() => navigator.clipboard.writeText(`/apply ${card.url}`)}
+                >
+                  copy
+                </button>
               </p>
             </>
           )}
