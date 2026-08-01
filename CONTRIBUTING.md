@@ -48,7 +48,7 @@ Market-specific skills are genuinely valuable - they just live in forks, where t
 
 - **Portal-skill contract**: `search`/`detail` commands, `--format json|table|plain`, stderr JSON errors with exit 1, backoff on 429/5xx, zero runtime dependencies by default. See `/add-portal`'s spec and `linkedin-search` as the reference implementation.
 - **Personal-use boundaries**: portal skills that touch ToS-restricted sources carry a prominent personal-use-only warning, and CI deliberately makes no live portal requests. Don't "fix" that.
-- **LaTeX changes**: both templates must compile (`lualatex` for the CV, `xelatex` for the cover letter) and hold their exact page counts. CI smoke-checks this.
+- **Template changes**: both example templates must render to PDF via `python tools/render_pdf.py` (CV `cv/main_example.html`, cover letter `cover_letters/cover_example.html`) and hold their page counts (CV 2 pages, cover letter 1). CI smoke-checks that they render.
 
 Questions and proposals are welcome in [Discussions](https://github.com/MadsLorentzen/ai-job-search/discussions) - an Idea thread costs nothing and can save you building the wrong thing :-)
 

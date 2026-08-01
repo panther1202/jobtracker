@@ -91,7 +91,7 @@ None specified
 ## Workflow for New Job Applications
 1. User provides a job posting (URL or text)
 2. **Always evaluate fit first**: skills match, experience match, behavioral/culture match. Present this assessment to the user before proceeding.
-3. If good fit: create targeted CV (`cv/main_<company>.html`) and cover letter (`cover_letters/cover_<company>_<role>.html`)
+3. If good fit: create targeted CV and cover letter inside the application folder `documents/applications/<company>_<role>/`, named `<Full Name> - <Company> - CV.html` and `<Full Name> - <Company> - Cover Letter.html`
 4. **Verify both documents** (see Verification Checklist below)
 5. Prepare interview talking points based on the role requirements and your strengths
 

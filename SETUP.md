@@ -42,64 +42,27 @@ powershell -ExecutionPolicy Bypass -c "irm https://bun.sh/install.ps1 | iex"
 
 If you prefer a package manager, `winget install Oven-sh.Bun` also works on Windows.
 
-### LaTeX (for compiling CVs and cover letters)
+### PDF rendering (xhtml2pdf)
 
-Install a LaTeX distribution to compile the generated `.tex` files to PDF:
-
-- **Windows:** [MiKTeX](https://miktex.org/download)
-- **macOS:** [MacTeX](https://tug.org/mactex/)
-- **Linux:** `sudo apt install texlive-full` or `sudo dnf install texlive-scheme-full`
-
-The CV compiles with `lualatex` (pdflatex often fails on modern MiKTeX installs with `fontawesome5` font-expansion errors). The cover letter compiles with `xelatex` because `cover.cls` requires `fontspec` for its custom Lato/Raleway fonts.
-
-#### Minimal TeX install: TinyTeX/BasicTeX
-
-Full TeX distributions work out of the box, but minimal distributions need a few extra packages before the stock templates compile.
-
-On macOS, a user-level TinyTeX install avoids a system-wide installer and does not require `sudo`:
+CVs and cover letters are generated as HTML and rendered to PDF with `xhtml2pdf`, a pure-Python library. Install it with:
 
 ```bash
-curl -fsSL https://yihui.org/tinytex/install-bin-unix.sh -o /tmp/tinytex-install-bin-unix.sh
-sh /tmp/tinytex-install-bin-unix.sh /tmp --no-path
-export PATH="$HOME/Library/TinyTeX/bin/universal-darwin:$PATH"
+pip install xhtml2pdf
 ```
 
-Then install the template dependencies:
+No TeX or LaTeX distribution is needed, and there are no fonts to install (the HTML uses system fonts via CSS).
+
+Smoke test after install:
 
 ```bash
-tlmgr install \
-  moderncv fontawesome5 fontawesome6 academicons import luatexbase pgf \
-  titlesec textpos xltxtra xunicode cite realscripts
+python tools/render_pdf.py cv/main_example.html
 ```
 
-For BasicTeX/MacTeX, make sure the TeX binary directory is on `PATH` first (for example via `/Library/TeX/texbin`), then run the same `tlmgr install ...` command.
-
-Quick smoke tests after setup:
-
-```bash
-cd cv && lualatex -interaction=nonstopmode -halt-on-error main_example.tex && cd ..
-
-SMOKE_DIR="$(mktemp -d /tmp/ai-job-cover-smoke.XXXXXX)"
-cp -R cover_letters/cover.cls cover_letters/OpenFonts "$SMOKE_DIR/"
-cat >"$SMOKE_DIR/cover_smoke.tex" <<'EOF'
-\documentclass[]{cover}
-\begin{document}
-\namesection{Test}{Candidate}{test@example.com}
-\companyname{Example Company}
-\companyaddress{123 Hiring Street\\Example City}
-\currentdate{\today}
-\lettercontent{Dear Hiring Manager,}
-\lettercontent{This smoke test verifies that xelatex can load cover.cls and the bundled fonts.}
-\closing{Sincerely,}
-\signature{Test Candidate}
-\end{document}
-EOF
-(cd "$SMOKE_DIR" && xelatex -interaction=nonstopmode -halt-on-error cover_smoke.tex)
-```
+This should print `OK` and produce `cv/main_example.pdf`.
 
 ### Optional: pdftotext (for the ATS check)
 
-`/apply` runs an ATS parseability check on the compiled CV: it extracts the PDF's text layer and verifies contact details, reading order, and keyword coverage the way an applicant-tracking system sees them. This uses `pdftotext` from [poppler](https://poppler.freedesktop.org/), which is not part of TeX distributions:
+`/apply` runs an ATS parseability check on the rendered CV: it extracts the PDF's text layer and verifies contact details, reading order, and keyword coverage the way an applicant-tracking system sees them. This uses `pdftotext` from [poppler](https://poppler.freedesktop.org/):
 
 - **macOS:** `brew install poppler`
 - **Debian/Ubuntu:** `sudo apt install poppler-utils`
@@ -173,7 +136,7 @@ All three paths produce the same result: fully populated profile files.
 | `04-job-evaluation.md` | Personalized skill match areas and career goals |
 | `05-cv-templates.md` | Profile statement templates for your background |
 | `07-interview-prep.md` | STAR examples from your experience |
-| `cv/main_example.tex` | Your LaTeX CV with actual details |
+| `cv/main_example.html` | Your HTML CV with actual details |
 | `search-queries.md` | Job search queries for `/scrape` |
 
 ### Re-running setup
@@ -222,23 +185,18 @@ Claude will:
 4. Have a reviewer agent critique the drafts
 5. Revise and present the final output
 
-## 7. Compile your documents
+## 7. Render your documents
 
-After `/apply` creates the LaTeX files:
+After `/apply` creates the HTML files, render each one to PDF:
 
 ```bash
-# Bash / zsh / Git Bash
-cd cv && lualatex main_<company>.tex && cd ..
-cd cover_letters && xelatex cover_<company>_<role>.tex && cd ..
+python tools/render_pdf.py cv/main_<company>.html
+python tools/render_pdf.py cover_letters/cover_<company>_<role>.html
 ```
 
-```powershell
-# PowerShell
-Set-Location cv; lualatex main_<company>.tex; Set-Location ..
-Set-Location cover_letters; xelatex cover_<company>_<role>.tex; Set-Location ..
-```
+The command is identical on Windows, macOS, and Linux. Each run writes the `.pdf` alongside the source `.html`.
 
-These commands apply to the stock templates (moderncv CV, `cover.cls` cover letter). If you'd rather use your own LaTeX template, run `/add-template` — it captures the template's compile engine, fonts, style rules, and page limit, test-compiles it, and wires it into `/apply`. See the "LaTeX templates" section in the README.
+These commands apply to the stock HTML templates. If you'd rather use your own template, run `/add-template` — it captures the template's render command, style rules, and page limit, test-renders it, and wires it into `/apply`. See the "Custom templates" section in the README.
 
 ## Troubleshooting
 
@@ -248,13 +206,9 @@ This is expected if you haven't set up salary benchmarking. The `/apply` workflo
 ### Job search CLI tools not working
 Make sure Bun is installed and you ran `bun install` in each CLI directory. The tools require network access to fetch job listings.
 
-### LaTeX compilation errors
-- CV: uses `lualatex` (pdflatex often fails on modern MiKTeX with `fontawesome5` font-expansion errors; lualatex handles the same sources cleanly)
-- Cover letter: uses `xelatex` (for custom fonts in `OpenFonts/fonts/`)
-- Make sure your LaTeX distribution includes the `moderncv` package
-
-### Fonts not found in cover letter
-The cover letter template expects fonts in `cover_letters/OpenFonts/fonts/`. Make sure this directory exists and contains the Lato and Raleway font files.
+### PDF rendering errors
+- Make sure `xhtml2pdf` is installed: `pip install xhtml2pdf`
+- `tools/render_pdf.py` prints `FAILED` on bad HTML or unsupported CSS. Check that the HTML is well-formed and uses only basic CSS (no flexbox or grid, which the renderer does not support)
 
 ### Stale `.claude/settings.local.json` from an older clone
 Shared Claude Code permissions now live in `.claude/settings.json` (scoped to `bun run`, `python salary_lookup.py`, and `python3 salary_lookup.py`). Earlier versions of this repo committed a broader `.claude/settings.local.json` that pre-approved `Bash(curl:*)`, `Bash(python:*)` and `Bash(bun:*)`. If you cloned before that change, git leaves the old file behind in your working copy, and its permissions still apply on top of `settings.json`. Delete it (or trim it to your own personal overrides):

@@ -8,15 +8,15 @@ This folder holds your actual career documents. The `/setup` command reads every
 
 ```
 documents/
-├── cv/                          # Your CV files (PDF or LaTeX)
+├── cv/                          # Your CV files (PDF or HTML)
 ├── linkedin/                    # LinkedIn profile export (PDF)
 ├── diplomas/                    # Degree certificates and transcripts
 ├── references/                  # Reference letters
 ├── applications/                # Past job applications
 │   └── <company>_<role>/
 │       ├── job_posting.md       # The original job posting (paste as text)
-│       ├── cover_letter.tex     # The cover letter you submitted
-│       ├── cv_draft.tex         # The CV variant you submitted
+│       ├── cover_letter.html    # The cover letter you submitted
+│       ├── cv_draft.html        # The CV variant you submitted
 │       └── outcome.md           # Result + notes (fill in after hearing back)
 └── README.md                    # This file
 ```
@@ -27,7 +27,7 @@ documents/
 
 Your master CV — the most complete, unedited version of your professional record.
 
-**Supported formats:** `.pdf`, `.tex`
+**Supported formats:** `.pdf`, `.html`
 
 **What `/setup` extracts:**
 - Work experience (titles, companies, dates, bullet points)
@@ -115,9 +115,9 @@ applications/
 
 **`job_posting.md`** — Paste the full job posting text here. Used by `/setup` to infer which skills and role types you have targeted, and to calibrate `04-job-evaluation.md`.
 
-**`cover_letter.tex`** — The cover letter you actually submitted. Used to extract writing style patterns and structure for `06-cover-letter-templates.md`.
+**`cover_letter.html`** — The cover letter you actually submitted. Used to extract writing style patterns and structure for `06-cover-letter-templates.md`.
 
-**`cv_draft.tex`** — The CV variant you submitted. Used to extract profile statement styles for `05-cv-templates.md`.
+**`cv_draft.html`** — The CV variant you submitted. Used to extract profile statement styles for `05-cv-templates.md`.
 
 **`outcome.md`** — Fill this in after the application resolves. Format:
 
@@ -155,7 +155,7 @@ Any signal about what they valued or didn't?
 | Format | Readable by `/setup` | Notes |
 |--------|--------------------------|-------|
 | `.pdf` | Yes | Parsed directly with the Read tool |
-| `.tex` | Yes | LaTeX source — structure and content both readable |
+| `.html` | Yes | HTML source — structure and content both readable |
 | `.md` | Yes | Plain text |
 | `.txt` | Yes | Plain text |
 | `.docx` | No | Convert to PDF before placing here |
