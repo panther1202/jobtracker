@@ -17,6 +17,7 @@ Follow these steps **exactly in order**. Do not skip steps.
 - If `$ARGUMENTS` looks like a URL, use `WebFetch` to retrieve the job posting content.
 - If it is pasted text, use it directly.
 - Extract: **company name**, **role title**, **department** (if mentioned), **location**, and **language** of the posting (Danish or English).
+- **Verify the real hiring employer.** Job boards and aggregators (e.g. SpeedyApply, and many generic "jobs" reposts) list roles under their own name, so the LinkedIn/board "company" may not be the actual employer. If the listed company looks like a job board, or the posting's content (product, mission, team) clearly belongs to a different organization, WebSearch/WebFetch to confirm the true hiring company **before drafting**, and address the CV/cover letter to that employer. Present the real employer to the user if it differs from what they invoked.
 - Store these for use throughout the workflow.
 
 ---
@@ -52,6 +53,8 @@ After presenting the evaluation, ask the user:
 
 ## Step 2: DRAFTER - Draft CV + Cover Letter
 
+**Output location (this fork's convention):** Write both files into the application's own archive folder `documents/applications/<company>_<role>/` (create it first), named `<Full Name> - <Company> - CV.html` and `<Full Name> - <Company> - Cover Letter.html`. The `cv/main_<company>.html` and `cover_letters/cover_<company>_<role>.html` paths referenced later in this command are the generic defaults; use these archive-folder paths instead throughout Steps 2-6 (write, render, inspect, and report those files). Because the drafts already live in the archive folder, a later `/outcome` only needs to add the tracker row and `outcome.md`, not copy the drafts.
+
 You already have `01-candidate-profile.md` and `04-job-evaluation.md` in context from Step 1. **Do not re-read them.**
 
 Read only the reference files you do not yet have:
@@ -60,8 +63,8 @@ Read only the reference files you do not yet have:
 - `.claude/skills/job-application-assistant/06-cover-letter-templates.md`
 
 Also read the most recent existing CV and cover letter files for concrete structural reference (one of each is enough):
-- Read any existing `cv/main_*.tex` file as a LaTeX template reference
-- Read any existing `cover_letters/cover_*.tex` or `cover_letters/Cover_*.tex` file as a template reference
+- Read any existing `cv/main_*.html` file as an HTML template reference
+- Read any existing `cover_letters/cover_*.html` file as a template reference
 
 ### CV (`cv/main_<company>.html`)
 - Always in **English**
@@ -174,21 +177,20 @@ After all edits are applied, the two files on disk are the final drafts.
 
 ---
 
-## Step 5: DRAFTER - Compile & Inspect PDFs (MANDATORY)
+## Step 5: DRAFTER - Render & Inspect PDFs (MANDATORY)
 
-**Never skip this step.** The `.tex` files looking fine is not sufficient — LaTeX page-break decisions are unpredictable and commonly produce broken layouts (orphaned job titles separated from their bullets, cover letters spilling to 2 pages, bullet fonts not matching body text). Compile both documents and visually verify the PDFs before presenting.
+**Never skip this step.** The `.html` files looking fine is not sufficient — PDF page-break decisions are unpredictable and commonly produce broken layouts (orphaned job titles separated from their bullets, cover letters spilling to 2 pages). Render both documents and visually verify the PDFs before presenting.
 
-### 5a. Compile
+### 5a. Render
 
 ```bash
-cd cv && lualatex -interaction=nonstopmode main_<company>.tex
-cd ../cover_letters && xelatex -interaction=nonstopmode cover_<company>_<role>.tex
+python tools/render_pdf.py cv/main_<company>.html
+python tools/render_pdf.py cover_letters/cover_<company>_<role>.html
 ```
 
-- CV uses **lualatex** — pdflatex fails on modern MiKTeX with fontawesome5 font-expansion errors. lualatex handles the same sources cleanly.
-- Cover letter uses **xelatex** — cover.cls requires fontspec.
+Both render with **xhtml2pdf** (pure Python, no TeX). Each writes the `.pdf` alongside the `.html` and prints `OK <path>` on success or `FAILED <path>` on error. The renderer needs `xhtml2pdf` (`pip install xhtml2pdf`).
 
-If either compile fails, fix the error and re-compile until clean.
+If either render fails, fix the HTML/CSS and re-render until clean.
 
 ### 5b. Inspect layout
 
@@ -196,24 +198,23 @@ Read both PDFs via the Read tool and verify:
 
 **CV (`cv/main_<company>.pdf`):**
 - [ ] Exactly 2 pages (not 1, not 3)
-- [ ] No orphaned `\cventry` titles — a job/education title line must never sit alone at the bottom of page 1 with its bullets on page 2. This is the most common failure.
+- [ ] No orphaned entry titles — a job/education title line must never sit alone at the bottom of page 1 with its bullets on page 2. This is the most common failure.
 - [ ] Section headings are not isolated at the top of page 2 with only 1-2 lines below
 - [ ] No awkward whitespace gaps
 
 **Cover letter (`cover_letters/cover_<company>_<role>.pdf`):**
 - [ ] Exactly 1 page
 - [ ] Signature block visible, not cut off or pushed to a second page
-- [ ] Bullet list font matches surrounding body text (both should be Raleway-Medium)
+- [ ] Bullet list renders in the body font (automatic in HTML — no separate font to configure)
 
 ### 5c. Iterate until clean
 
-If the layout has problems, edit the `.tex` files and recompile. Common fixes (see `05-cv-templates.md` and `06-cover-letter-templates.md` for full details):
+If the layout has problems, edit the `.html` files and re-render. Common fixes (see `05-cv-templates.md` and `06-cover-letter-templates.md` for full details):
 
-- **Orphaned CV entry title:** `\usepackage{needspace}` in preamble, then `\needspace{5\baselineskip}` immediately before the problematic `\cventry`
-- **CV spills to page 3 with only a trailing section:** `\enlargethispage{2-3\baselineskip}` before a late section
+- **Orphaned CV entry title:** add `page-break-inside: avoid;` to the `.entry` CSS so a role's heading and its bullets stay together
+- **CV spills to page 3 with only a trailing section:** cut a low-relevance line first; only as a last resort tighten `line-height` or `.entry` margins slightly in the `<style>` block
 - **Substantial content on page 3:** cut content using **relevance-weighted cutting** (see `05-cv-templates.md` → "Relevance-weighted cutting"). Score each candidate line by (a) relevance to THIS posting's keywords and responsibilities, (b) uniqueness (is it duplicated elsewhere?), (c) narrative load (does the cover letter depend on it?). Cut the lowest-total-score line first, regardless of section. Do NOT mechanically apply a static section-based priority order — an older-role bullet that hits posting keywords is worth more than a recent-role bullet that does not.
-- **Cover letter itemize breaks compile or uses wrong font:** close `\lettercontent{}` before the list, wrap the list in `{\raggedright\fontspec[Path = OpenFonts/fonts/raleway/]{Raleway-Medium}\fontsize{11pt}{13pt}\selectfont \begin{itemize}...\end{itemize}\par}`
-- **Cover letter spills to 2 pages:** trim using the same relevance-weighted logic. First cut: sentences that restate what a bullet already said. Second cut: a bullet that does not hit posting keywords. Last resort: a bullet that does hit posting keywords. Never reduce geometry or line spacing.
+- **Cover letter spills to 2 pages:** trim using the same relevance-weighted logic. First cut: sentences that restate what a bullet already said. Second cut: a bullet that does not hit posting keywords. Last resort: a bullet that does hit posting keywords. Prefer cutting words over shrinking margins or line-height.
 
 Do not proceed to Step 6 until both PDFs pass inspection.
 
@@ -238,7 +239,7 @@ Read the `.txt` file.
 - [ ] **Reading order matches the visual order** — section headings appear in the same sequence as on the page, and lines from different sections are not interleaved. The stock banking template is single-column and safe; custom templates registered via `/add-template` with sidebars or multi-column layouts are where this breaks.
 - [ ] **Dates recognizable** — each role and degree has its years present in the extraction.
 
-Failures here are template-level problems: fix them in the `.tex` (e.g. print the email as text rather than icon-only), then re-run 5a–5c and re-extract. If a custom template's layout fundamentally scrambles extraction order, tell the user prominently — they may be trading ATS compatibility for looks.
+Failures here are template-level problems: fix them in the `.html` (e.g. print the email as literal text, not only inside a `mailto:` link), then re-run 5a–5c and re-extract. If a custom template's layout fundamentally scrambles extraction order, tell the user prominently — they may be trading ATS compatibility for looks.
 
 **3. Keyword coverage.** Reuse the required/preferred keyword list you extracted in Step 1 — do not re-derive it. Match each keyword against the extracted text, **in the posting's language** (a Danish posting's keywords are matched in Danish even though the CV is in English — where the CV legitimately covers the concept in English, count it as synonym-only and note the language difference). Report a table:
 
@@ -255,7 +256,7 @@ Failures here are template-level problems: fix them in the `.tex` (e.g. print th
 
 ### 5e. Clean up build artifacts
 
-After the final clean compile, delete the `.aux`, `.log`, `.out` files (keep the `.tex` and `.pdf`).
+The renderer produces no `.aux`/`.log`/`.out` artifacts. Just ensure the extracted `.txt` from 5d is deleted (keep the `.html` and `.pdf`).
 
 ---
 
@@ -275,9 +276,9 @@ Summarize 3-5 key decisions made to tailor the application:
 
 ### Files Created
 List the files written:
-- `cv/main_<company>.tex`
-- `cover_letters/cover_<company>_<role>.tex`
+- `cv/main_<company>.html`
+- `cover_letters/cover_<company>_<role>.html`
 
-Tell the user: "Both files are ready for your review. Open them to check the final output before compiling."
+Tell the user: "Both files are ready for your review. Open the rendered PDFs to check the final output."
 
 Also mention: once they have actually submitted the application, `/outcome <company>` logs it in the tracker and starts the per-application record that `/setup` later uses to calibrate the fit framework.

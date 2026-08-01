@@ -7,7 +7,7 @@
 - **Name:** Panth Patel
 - **Location:** Currently Vadodara, Gujarat, India; relocating to Somerset, NJ, USA within ~2 months. Job search targets US market (Somerset, NJ / remote / nationwide).
 - **Phone:** Not provided - email is primary point of contact
-- **Email:** panthpatel0122@gmail.com
+- **Email:** panthpatel.aiengg@gmail.com
 - **LinkedIn:** https://www.linkedin.com/in/panthpatel0122/
 - **GitHub:** N/A
 - **Languages:** English (fluent), Hindi (fluent), Gujarati (fluent)
@@ -54,11 +54,12 @@ Ahmedabad, Gujarat, India
 
 ### Programming & ML
 - **Python** (Advanced/Proficient - performs tasks independently, handles complex situations, troubleshoots effectively): LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, OpenCV
-- **JavaScript** (Advanced/Proficient)
+- **JavaScript / TypeScript** (Advanced/Proficient) - including **React**; current work stack is React/TypeScript, hands-on front-end and full-stack
 - **SQL** (Advanced/Proficient)
 - **FastAPI** (good experience - building/serving APIs for Python services)
 - **LLM providers / APIs** (hands-on across multiple): OpenAI, Amazon Bedrock (Amazon Nova v1 Pro), Google AI Studio; comfortable choosing and switching between models
 - **LLM tool/function-calling** (used within LangGraph pipelines)
+- **MCP (Model Context Protocol)** - hands-on building and integrating multiple MCP servers/tools into development workflows; actively exploring new MCPs to speed up development
 
 ### Domain Expertise
 - Adaptable across domains, eager to learn

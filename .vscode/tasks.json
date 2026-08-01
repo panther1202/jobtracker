@@ -1,0 +1,82 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Tracker: Backend (8100)",
+      "type": "shell",
+      "command": "uvicorn app:app --reload --port 8100",
+      "options": { "cwd": "${workspaceFolder}/tracker/backend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "tracker", "panel": "dedicated" },
+      "detail": "Run the FastAPI tracker backend with hot reload on http://127.0.0.1:8100"
+    },
+    {
+      "label": "Tracker: Frontend dev",
+      "type": "shell",
+      "command": "bun run dev",
+      "options": { "cwd": "${workspaceFolder}/tracker/frontend" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "tracker", "panel": "dedicated" },
+      "detail": "Run the Vite dev server (http://localhost:5173), proxying /api to the backend"
+    },
+    {
+      "label": "Tracker: Dev (backend + frontend)",
+      "dependsOn": ["Tracker: Backend (8100)", "Tracker: Frontend dev"],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true },
+      "detail": "Start both tracker processes together"
+    },
+    {
+      "label": "Tracker: Build frontend",
+      "type": "shell",
+      "command": "bun run build",
+      "options": { "cwd": "${workspaceFolder}/tracker/frontend" },
+      "problemMatcher": [],
+      "detail": "Build the frontend bundle into tracker/frontend/dist (served by the backend at /)"
+    },
+    {
+      "label": "Tracker: Frontend typecheck",
+      "type": "shell",
+      "command": "bun run typecheck",
+      "options": { "cwd": "${workspaceFolder}/tracker/frontend" },
+      "problemMatcher": [],
+      "detail": "Type-check the React frontend (tsc --noEmit)"
+    },
+    {
+      "label": "Tracker: Install backend deps",
+      "type": "shell",
+      "command": "pip install -r requirements.txt",
+      "options": { "cwd": "${workspaceFolder}/tracker/backend" },
+      "problemMatcher": [],
+      "detail": "Install FastAPI + uvicorn for the tracker backend"
+    },
+    {
+      "label": "Python tests",
+      "type": "shell",
+      "command": "python -m unittest discover -s tests -t . -v",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "test",
+      "problemMatcher": [],
+      "detail": "Run all Python unittest suites (mirrors CI python-tests)"
+    },
+    {
+      "label": "Lint skills",
+      "type": "shell",
+      "command": "python tools/lint_skills.py",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "detail": "Lint skills, commands, and settings.json (mirrors CI lint)"
+    },
+    {
+      "label": "Security guards",
+      "type": "shell",
+      "command": "python tools/security_guards.py",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "detail": "Check permission allowlist, gitignore rules, and package manifests (mirrors CI)"
+    }
+  ]
+}

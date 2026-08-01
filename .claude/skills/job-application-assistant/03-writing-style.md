@@ -12,6 +12,8 @@
    - **Flag it:** Combining academic + industry experience into a single claim that implies it was all industry; describing work using the posting's specific terminology when the actual work was adjacent but not the same.
    - **Never:** Claiming experience the candidate doesn't have; implying they worked in a domain they haven't.
    When a bullet falls in the "flag it" zone, present it to the user after drafting with: "This bullet is a stretch because X. Keep, soften, or drop?" If the evaluation experience match score is below 50, warn before proceeding to drafting that extensive reframing would be needed.
+7. **Do not inflate project maturity.** Describe work at its true stage, using the profile's stated status. A tool that is "in development / in progress" is not "in production"; informal accuracy tracking ("I measure accuracy against expected output and iterate") is not a formal "evaluation framework" or "regression-test harness." When unsure, prefer "building" over "shipped to production." Supported metrics (e.g. 85% accuracy, one day to five minutes) are fine to keep.
+8. **Turn genuine gaps into offers, never fabrications.** A missing "preferred" item can become a forward-looking offer instead of a silent hole: no public GitHub -> "I'm glad to walk through my code directly"; an unfamiliar named tool (RAG, Langfuse, Databricks) -> "I'd ramp quickly on your eval/data tooling." State the gap once, offer the path, and never claim a skill the candidate lacks.
 
 ## Tone
 - **Warm but direct.** Friendly and approachable, but confident without arrogance.

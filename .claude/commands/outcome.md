@@ -58,7 +58,7 @@ Also collect, without interrogating - one or two open questions are enough:
 
 Create or update `documents/applications/<company>_<role>/`. All content here is personal data - the folder is already gitignored (`documents/applications/**`), so nothing needs redacting.
 
-1. **`cv_draft.tex` and `cover_letter.tex`** - copy (never move) the submitted files. Locate them via the tracker row's `cv_file`/`cover_letter_file` columns; if those are empty, look for `cv/main_<company>.tex` and `cover_letters/cover_<company>_*.tex`. If a file already exists in the archive, leave it - the archived version is what was actually submitted. If no draft files exist (application made outside `/apply`), skip with a note.
+1. **Submitted CV and cover letter** - for applications created by `/apply`, the drafts already live in this folder as `<Full Name> - <Company> - CV.html` and `<Full Name> - <Company> - Cover Letter.html` (plus rendered `.pdf`s). Leave them; they are the submitted versions, no copy needed. Only for applications made **outside** `/apply` do you copy submitted files in: locate them via the tracker row's `cv_file`/`cover_letter_file` columns or the legacy `cv/main_<company>.html` / `cover_letters/cover_<company>_*.html` paths, copy (never move) as `cv_draft.html` / `cover_letter.html`, and never overwrite a file already in the archive. If no draft files exist, skip with a note.
 2. **`job_posting.md`** - if it already exists, leave it. Otherwise try WebFetch on the tracker row's `source` URL and save the posting text. If the URL is dead (postings expire fast - this is exactly why the archive matters), ask the user to paste the posting, or write a stub noting the posting is unavailable. **Never reconstruct a posting from memory.**
 3. **`outcome.md`** - write or update it in exactly the format documented in `documents/README.md`, so `/setup` Path A parses it without special cases:
 
@@ -108,7 +108,7 @@ Summarize what was recorded:
 > **Outcome recorded for <Role> at <Company>.**
 >
 > - `documents/applications/<company>_<role>/outcome.md` - status: <status>, <what changed>
-> - Archived: <which of cv_draft.tex / cover_letter.tex / job_posting.md were copied or fetched, and which were skipped and why>
+> - Archived: <which of cv_draft.html / cover_letter.html / job_posting.md were copied or fetched, and which were skipped and why>
 > - Tracker: status → <new status>
 >
 > [Calibration suggestion from Step 5, if triggered]
