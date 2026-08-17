@@ -17,6 +17,7 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ### Identity
 - **Name:** Panth Patel
+- **Phone:** +1 732-824-1460 (use on all CVs and cover letters)
 - **Location:** Currently Vadodara, Gujarat, India; relocating to Somerset, NJ, USA within ~2 months. No commute/relocation constraints; job search targets US market.
 - **Languages:** English (fluent), Hindi (fluent), Gujarati (fluent)
 - **Status:** Employed - Software Engineer at Sunflower Labs
@@ -32,9 +33,26 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 ### Professional Experience
 <!-- List your roles, most recent first -->
 - **Software Engineer** (Feb 2026 - Present) - **Sunflower Labs** (Vadodara, India; remote-eligible)
+  - Two tracks of work: (A) applied AI / LLM tooling, (B) full-stack product engineering on a client SaaS platform. Both are current; emphasise whichever the target posting calls for (see "Positioning" below).
+
+  **(A) Applied AI / LLM automation**
   - Python developer on the AI team, building AI tools for clients and integrating AI into existing products for AI compliance
-  - Independently developing a tool that converts large IONM machine JSON output into CMS 1500 insurance-claim format, using Python + Amazon Nova v1 Pro on Amazon Bedrock (in progress)
-  - Cut manual claim-entry time from ~1 day/surgery to under 5 minutes; current accuracy 85% and improving
+  - Independently developing a tool that converts large IONM machine JSON output into CMS 1500 insurance-claim format, using Python + Amazon Nova v1 Pro on Amazon Bedrock (in development, not production)
+  - Cut manual claim-entry time from ~1 day/surgery to under 5 minutes; current accuracy 85% and improving (measured informally; no formal eval harness)
+
+  **(B) Full-stack engineering on a multi-tenant healthcare SaaS patient-engagement platform (client engagement)**
+  - NDA: **never name the client or its EMR/practice-management vendors.** Describe as "a multi-tenant healthcare SaaS patient-engagement platform" and "a third-party EMR". Never cite internal ticket/epic IDs.
+  - Schema-per-tenant PostgreSQL, deployed on AWS ECS. Owned features end-to-end across ~11 repositories: data model -> raw-SQL multi-tenant migration -> FastAPI backend -> workflow-engine logic -> React UI -> tests -> QA sign-off
+  - Stack: Python 3.11, FastAPI, async SQLAlchemy 2.0 / SQLModel, Pydantic, asyncpg, PostgreSQL; React 18 + TypeScript, Vite, Redux Toolkit, React Query, Radix/Tailwind, AG Grid, FullCalendar; AWS Lambda, SNS/SQS (FIFO), S3; Inngest durable workflows; Mirth Connect (HL7); pytest/pytest-asyncio, vitest
+  - **Patient self-service appointment reschedule:** built a DOB identity gate with lockout and anti-enumeration responses, JWT session tokens, a pure slot-availability engine (recurrence expansion, timezone/DST-safe local<->UTC conversion, rolling 30-day horizon), and a concurrency-safe confirm path using `SELECT ... FOR UPDATE` plus PostgreSQL advisory locks for one-winner slot booking (409 on race). Shipped the patient React wizard mock-first so frontend and backend landed in parallel
+  - **Cross-flow identity voucher:** designed a device-bound, patient-scoped JWT voucher so patients skip DOB re-verification between portals - rejected a simpler server-side "recent verify by patientId" design that would have let any holder of a bearer link bypass the identity gate
+  - **Workflow serialization / race-condition repair:** diagnosed that Inngest `concurrency=1` does not serialize suspended executions (the slot is released at `wait_for_event`), so one inbound SMS reply resumed only one of several parked workflows. Built per-patient ownership locking with a FIFO grant queue and TTL-based crash self-healing (no polling cron), with a pure decision core under unit test; later found and fixed a lost-grant race by making the DB owner row the source of truth and the event merely a fast wake
+  - **Workflow chronology fixes:** traced a double-applied delay across serializer and engine (a 5-minute buffer firing at 10) and a reply-attribution race caused by writing conversation state after the physical send; verified fixes with a deterministic in-process harness (fake step + mocked storage) instead of live sends on shared infrastructure
+  - **Multi-channel delivery status (SMS / Email / Voice):** JSONB `channelDelivery` column plus expansion API; channel-aware dashboard with live polling and a voice-call detail page; voice/TTS configuration panel with readability validation that blocks publish on unreadable scripts
+  - **Broadcast automation:** designed and built a one-time, CSV-driven mass-messaging feature end-to-end - data model, S3 CSV pipeline, engine scheduler + executor, 5-step wizard, dashboard, permissions, migrations, and a 45-case QA matrix - deliberately reusing existing campaign/workflow primitives instead of reviving parked code
+  - **Bi-directional EMR integration:** inbound case / insurance / appointment sync over SNS -> SQS FIFO -> Mirth -> REST, plus outbound form-approval push. Fixed insurance round-trip identity with an `externalId` backbone (replacing fragile array-index and policy-number matching), E.164 phone normalization at a single correct boundary, timezone-bucketed practice-line routing, provider de-duplication by EMR provider ID across every appointment-creation source, and automated case-note write-back on message delivery with a three-column dedupe key
+  - **Calendar blackouts:** surfaced availability blackouts on the staff FullCalendar as background events and blocked drag / resize / manual reschedule into them, reusing the patient-side slot engine's recurrence and timezone logic rather than duplicating it
+  - **QA & release engineering:** ran structured QA rounds, produced Excel test-case matrices, triaged bugs against intent (withdrew an invalid bug after confirming the ticket description itself was wrong), maintained a standalone pytest end-to-end automation harness (workflows, campaigns, webhooks, delivery verification)
 - **Teacher** (Feb 2023 - Jul 2023) - **Aarham Academy**
   - Taught math and science to students through 10th grade for 6 months
 - **Core BOD (volunteer leadership)** (Mar 2021 - Jul 2023) - **Rotaract Club of Indus University**
@@ -46,11 +64,23 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 - **Image Color-Pattern Clustering Tool** (Apr 2024 - Sep 2024, freelance): Python + OpenCV clustering tool to identify user-defined color patterns in images. Reached 70% completion before the client discontinued the engagement prior to deployment.
 
 ### Technical Skills
-- **Primary:** Python (advanced) - LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, OpenCV
-- **Secondary:** JavaScript, SQL, FastAPI; LLM tool/function-calling (in LangGraph)
-- **LLM providers/APIs:** OpenAI, Amazon Bedrock (Amazon Nova v1 Pro), Google AI Studio (multi-provider, comfortable switching models)
-- **Domain:** Adaptable across domains; growing edge in healthcare (IONM data / insurance claims automation)
-- **Software:** VS Code, IntelliJ, AWS (incl. Amazon Bedrock), Docker, Git, DynamoDB, PostgreSQL
+- **Primary:** Python (advanced) - FastAPI, async SQLAlchemy 2.0 / SQLModel, Pydantic, asyncpg; LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, OpenCV
+- **Backend / data:** PostgreSQL (advisory locks, `SELECT ... FOR UPDATE`, JSONB modeling, partial-unique indexes, `search_path` semantics), idempotent multi-tenant raw-SQL migrations, REST API design, pytest / pytest-asyncio with mock-session fixtures
+- **Frontend:** React 18 + TypeScript, Vite, Redux Toolkit, React Query (state-boundary judgement), Radix + Tailwind design-system compliance, AG Grid, FullCalendar, ReactFlow, vitest; multi-step wizard architecture with aggregated cross-field validation; mock-driven frontend delivery ahead of backend
+- **Distributed / event-driven:** Inngest durable workflows and their concurrency semantics, race-condition diagnosis and repair, FIFO ordering, idempotency via natural-key upserts, crash recovery via TTL self-healing, SNS / SQS / Lambda pipelines, DLQ and poison-message reasoning
+- **Multi-tenancy & security:** schema-per-tenant isolation and its failure modes, JWT session and voucher design, anti-enumeration response design, lockout and rate-limit gating, token entropy trade-offs, tenant-context correctness in background jobs
+- **Integrations:** Mirth Connect channel development, HL7 intake, EMR data-contract reverse-engineering from real payloads, AWS SDK / IAM debugging, CSV bulk-ingestion pipelines
+- **LLM providers/APIs:** OpenAI, Amazon Bedrock (Amazon Nova v1 Pro), Google AI Studio (multi-provider, comfortable switching models); LLM tool/function-calling in LangGraph
+- **Other languages:** JavaScript / TypeScript, SQL
+- **Domain:** US healthcare - patient engagement, insurance and eligibility data models, Workers' Comp and Auto claim fields, TCPA quiet-hours compliance, SMS/voice/email delivery semantics, appointment lifecycle and reschedule rules, timezone/DST correctness in clinical scheduling; IONM data and CMS 1500 claims automation
+- **Engineering practice:** spec/plan-first delivery, behavior-preserving refactors (extract shared services verbatim before reuse), pure-function cores for testability, cross-team API contract coordination, deliberate scope-cutting with documented rationale
+- **Software:** VS Code, IntelliJ, AWS (ECS, Lambda, SNS, SQS, S3, Bedrock), Docker, Git, PostgreSQL, DynamoDB
+
+### Positioning (dual-track)
+Two credible tracks; pick per posting rather than averaging them:
+- **AI / LLM engineer** - lead with the Bedrock IONM -> CMS 1500 pipeline, LangChain/LangGraph, prompt and output-validation work. Backend depth from the SaaS platform becomes supporting evidence of production engineering.
+- **Backend / full-stack engineer** - lead with the multi-tenant healthcare SaaS platform: FastAPI + async SQLAlchemy, PostgreSQL concurrency control, event-driven AWS, React 18/TS, race-condition debugging. The LLM pipeline becomes one bullet showing AI fluency.
+For generalist SWE or platform roles, favour the backend track - it has more production surface, more systems depth, and clearer scale.
 
 ### Certifications
 <!-- List relevant certifications with dates -->
