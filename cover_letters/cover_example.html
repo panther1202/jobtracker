@@ -11,24 +11,25 @@
 <head>
 <meta charset="utf-8">
 <style>
+/* Roboto is registered by tools/render_pdf.py (no @font-face: it breaks on Windows). */
 @page { size: letter; margin: 1.7cm 1.8cm; }
-body { font-family: Helvetica, Arial, sans-serif; font-size: 10.5pt; color: #222; line-height: 1.4; }
-h1 { color: #2b6cb0; font-size: 22pt; margin: 0 0 2pt 0; }
-.contact { font-size: 9.5pt; color: #444; margin-bottom: 4pt; }
-.contact a { color: #2b6cb0; text-decoration: none; }
-.rule { border-bottom: 1.2pt solid #2b6cb0; margin-bottom: 12pt; }
-.date { color: #555; margin-bottom: 12pt; font-size: 9.5pt; }
+body { font-family: Roboto; font-size: 10pt; color: #202124; line-height: 1.5; text-align: justify; }
+h1 { font-family: Roboto; font-size: 20pt; font-weight: bold; color: #14487f; margin: 0 0 3pt 0; text-align: left; }
+.contact { font-size: 9.5pt; color: #444444; margin-bottom: 4pt; text-align: left; }
+.contact a { color: #14487f; text-decoration: none; }
+.rule { border-bottom: 1pt solid #14487f; margin-bottom: 12pt; }
+.date { font-size: 9.5pt; color: #555555; margin-bottom: 12pt; text-align: left; }
 p { margin: 0 0 9pt 0; text-align: justify; }
-ul { margin: 0 0 9pt 0; padding-left: 16pt; }
-li { margin-bottom: 3pt; text-align: left; }
-.label { font-weight: bold; }
-.sig { margin-top: 14pt; }
+ul { margin: 0 0 9pt 0; padding-left: 14pt; }
+li { margin-bottom: 4pt; text-align: justify; }
+b, .label { font-weight: bold; color: #14487f; }
+.sig { margin-top: 14pt; text-align: left; }
 </style>
 </head>
 <body>
 
 <h1>[YOUR NAME]</h1>
-<div class="contact"><a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a> &nbsp;|&nbsp; <a href="[YOUR_LINKEDIN_URL]">LinkedIn</a></div>
+<div class="contact">[YOUR_PHONE] &nbsp;|&nbsp; <a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a> &nbsp;|&nbsp; <a href="[YOUR_LINKEDIN_URL]">LinkedIn</a></div>
 <div class="rule"></div>
 
 <div class="date">[DATE]</div>

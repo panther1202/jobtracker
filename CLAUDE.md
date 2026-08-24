@@ -18,7 +18,8 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 ### Identity
 - **Name:** Panth Patel
 - **Phone:** +1 732-824-1460 (use on all CVs and cover letters)
-- **Location:** Currently Vadodara, Gujarat, India; relocating to Somerset, NJ, USA within ~2 months. No commute/relocation constraints; job search targets US market.
+- **Location:** Currently Vadodara, Gujarat, India; relocating to Somerset, NJ, USA. No commute/relocation constraints; job search targets US market.
+- **Location on documents:** header reads **"Relocating to Somerset, NJ, USA"**, and the Sunflower Labs role keeps its true location (Vadodara, India). A NJ header above an India-based job reads to US recruiters as an offshore candidate needing sponsorship - the relocation wording removes the contradiction without overclaiming. Do not assert US work authorization anywhere; that is Panth's to state.
 - **Languages:** English (fluent), Hindi (fluent), Gujarati (fluent)
 - **Status:** Employed - Software Engineer at Sunflower Labs
 - **LinkedIn headline:** "AI/Python Engineer | LLM Automation (LangChain, AWS Bedrock) | Building AI tools @ Sunflower Labs"
@@ -61,7 +62,9 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 - **QA Tester** (Aug 2020 - Dec 2020) - **Sunflower Labs** (during break between undergraduate diploma and Bachelor's)
 
 ### Independent Projects
-- **Image Color-Pattern Clustering Tool** (Apr 2024 - Sep 2024, freelance): Python + OpenCV clustering tool to identify user-defined color patterns in images. Reached 70% completion before the client discontinued the engagement prior to deployment.
+- **Loan Qualification Engine** (academic coursework): Python machine-learning pipeline automating real-time loan qualification decisions, comparing Logistic Regression and Random Forest classifiers. *Dates, institution, dataset and result metrics still unconfirmed - ask Panth before claiming any figure.*
+- **Holiday Notification Service** (academic coursework): scheduled notification engine built with FastAPI and Firebase. *Dates, institution and scope still unconfirmed.*
+- **Image Color-Pattern Clustering Tool** (Apr 2024 - Sep 2024, freelance): Python + OpenCV clustering tool to identify user-defined color patterns in images. Reached 70% completion before the client discontinued the engagement prior to deployment. **On CVs, state what was built and omit the completion percentage** - Panth's call (2026-08-19); it is honest to omit, but never claim it shipped.
 
 ### Technical Skills
 - **Primary:** Python (advanced) - FastAPI, async SQLAlchemy 2.0 / SQLModel, Pydantic, asyncpg; LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, OpenCV
@@ -127,6 +130,44 @@ None specified
 
 **Important:** When mentioning agentic coding or AI tooling in CVs/cover letters, explicitly reference **Claude Code** by name.
 
+## Document Design Standard (MANDATORY)
+
+Panth reviewed the first Roboto-less drafts and asked for these fixes; they now apply to
+**every** CV and cover letter, not just the ones that prompted them. `cv/main_example.html`
+and `cover_letters/cover_example.html` already encode the standard - copy them, do not
+re-invent the stylesheet.
+
+1. **Roboto only.** `font-family: Roboto`, no fallback stack in the document. The renderer
+   registers the vendored `assets/fonts/Roboto-{Regular,Bold}.ttf` with reportlab up front.
+   Do **not** add an `@font-face` rule: on Windows xhtml2pdf copies the TTF into a
+   still-open temp file and reportlab then fails to reopen it.
+2. **Three font sizes, no more.** 20pt name, 10pt section headings, 9.5pt everything else -
+   body, bullets, role titles, dates, contact line. Never size a role title differently from
+   its bullets.
+3. **Consistent headings.** All section headings are `<h2>`, typed in CAPITALS (CSS
+   `text-transform` is unreliable in this renderer), same colour `#14487f`, same rule
+   underneath, same spacing. Role titles are bold body-size; organisations are plain, never
+   italic. The vendored Roboto set has no italic face, so avoid `<em>`/italics entirely.
+4. **Justified body copy.** `text-align: justify` on the body, the profile paragraph, and
+   every `<li>`, so blocks end flush on both edges. Table cells are exempt: keep the left
+   cell left-aligned and the date cell right-aligned, or degree titles stretch grotesquely.
+5. **Highlight for the skim.** Every experience bullet opens with a bold lead-in label
+   (`<b>Concurrency-safe booking:</b> ...`), and every metric is bold. Bold nothing else -
+   if everything is bold, nothing is.
+6. **Concise.** Bullets run 20-30 words. Six to eight bullets on the current role, one or two
+   on older ones, none where the job title already says it. Cut before shrinking type.
+7. **Readable rhythm.** `line-height: 1.5`, 5pt between bullets, 15pt above each section
+   heading. Whitespace is what buys readability back after cutting words.
+
+**Renderer gotchas**
+- **Exotic glyphs vanish.** Arrows (`&rarr;`), and anything outside the Roboto subset, render
+  as nothing at all - silently. Write "SNS to SQS FIFO to Mirth Connect to REST", not arrows.
+  Em dash, en dash, bullet and `&reg;` are safe.
+- **`page-break-inside: avoid` is not enough** to stop a role title stranding at the foot of a
+  page. `.entryhead` carries `-pdf-keep-with-next: true`, which is what actually works. Keep it.
+- Verify with `python tools/verify_pdf.py <file>.pdf` (page count, `(cid:` markers, replacement
+  characters, and that phone and email survive text extraction).
+
 ## Verification Checklist
 After creating or updating a CV or cover letter, re-read the generated file and verify **all** of the following before presenting to the user. Report the results as a pass/fail checklist.
 
@@ -150,6 +191,8 @@ After creating or updating a CV or cover letter, re-read the generated file and 
 
 ### Quality
 - [ ] No HTML syntax errors (balanced tags, and only CSS the renderer supports)
+- [ ] Document follows the Document Design Standard above: Roboto, three font sizes, CAPITALS headings, justified body and bullets, bold lead-in on every experience bullet, no italics
+- [ ] No arrows or other non-subset glyphs (they render as nothing) - diff the PDF text against the HTML if unsure
 - [ ] No spelling or grammar errors
 - [ ] Agentic coding / AI tooling references mention **Claude Code** by name
 - [ ] Cover letter is addressed to the correct person (or "Dear Hiring Manager" if unknown)
@@ -160,6 +203,7 @@ Both documents MUST be rendered to PDF and visually inspected via the Read tool 
 - [ ] CV and cover letter rendered with `python tools/render_pdf.py <file>.html` (xhtml2pdf, pure Python, no TeX). The `.pdf` is written alongside the `.html`.
 - [ ] **CV is exactly 2 pages** - not 1, not 3
 - [ ] **No orphaned entry titles** - a job/education title must never sit at the bottom of a page with its bullets spilling to the next page. Keep each role's `.entry` block together; add `page-break-inside: avoid;` to the `.entry` CSS if a break lands awkwardly, and cut low-relevance content to rescue a trailing section that just barely spills
+- [ ] `python tools/verify_pdf.py <file>.pdf` passes (page count, no `(cid:` markers, no replacement characters, phone and email present in the text layer)
 - [ ] **Cover letter is exactly 1 page** - signature block must fit with the body, never overflow
 - [ ] **Cover letter fits on one page** with the signature block - trim body content (target 250-300 words) rather than shrinking margins or line-height. The bullet list inherits the body font automatically, so there is no font-mismatch pitfall
 

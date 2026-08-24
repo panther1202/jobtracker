@@ -6,49 +6,64 @@
   tailors it per role. Keep the [PLACEHOLDER] tokens in this file - never commit
   personal data here (the placeholder-integrity CI check enforces this).
 
+  House style (see "Document Design Standard" in CLAUDE.md - do not deviate):
+    - Roboto only, registered by the renderer. Exactly three sizes: 20pt name,
+      10pt section headings, 9.5pt everything else.
+    - Section headings typed in CAPITALS (text-transform is unreliable here).
+    - Body copy and bullets justified; table cells left/right aligned.
+    - Every bullet opens with a <b> lead-in label so an HR skim lands on it;
+      bold metrics too. Nothing else is bold.
+    - No italics (the vendored Roboto set has no italic face).
+    - Avoid arrows and other exotic glyphs: they vanish from the Roboto subset.
+      Write "to" instead of an arrow.
+
   Render:  python tools/render_pdf.py cv/main_example.html
+  Verify:  python tools/verify_pdf.py cv/main_example.pdf
 -->
 <html>
 <head>
 <meta charset="utf-8">
 <style>
-@page { size: letter; margin: 1.5cm 1.6cm; }
-body { font-family: Helvetica, Arial, sans-serif; font-size: 10pt; color: #222; line-height: 1.34; }
-h1 { color: #2b6cb0; font-size: 24pt; margin: 0 0 2pt 0; letter-spacing: 0.5pt; }
-.contact { font-size: 9.5pt; color: #444; margin-bottom: 10pt; }
-.contact a { color: #2b6cb0; text-decoration: none; }
-.summary { margin: 0 0 12pt 0; text-align: justify; }
-h2 { color: #2b6cb0; font-size: 12pt; border-bottom: 1.2pt solid #2b6cb0; padding-bottom: 2pt; margin: 12pt 0 6pt 0; }
-.entry { margin-bottom: 8pt; }
-.entryhead { width: 100%; }
-.entryhead td { vertical-align: top; padding: 0; }
-.role { font-weight: bold; font-size: 10.5pt; }
-.org { font-style: italic; color: #333; }
-.right { text-align: right; color: #555; white-space: nowrap; font-size: 9.5pt; }
-ul { margin: 3pt 0 0 0; padding-left: 15pt; }
-li { margin-bottom: 2pt; }
-.comp li { margin-bottom: 3pt; }
-.label { font-weight: bold; }
+/* Roboto is registered by tools/render_pdf.py (no @font-face: it breaks on Windows). */
+@page { size: letter; margin: 1.35cm 1.5cm; }
+body { font-family: Roboto; font-size: 9.5pt; color: #202124; line-height: 1.5; text-align: justify; }
+h1 { font-family: Roboto; font-size: 20pt; font-weight: bold; color: #14487f; margin: 0 0 3pt 0; text-align: left; }
+.contact { font-size: 9.5pt; color: #444444; margin-bottom: 12pt; text-align: left; }
+.contact a { color: #14487f; text-decoration: none; }
+.summary { margin: 0 0 2pt 0; }
+h2 { font-family: Roboto; font-size: 10pt; font-weight: bold; color: #14487f; letter-spacing: 0.8pt;
+     border-bottom: 1pt solid #14487f; padding-bottom: 2.5pt; margin: 15pt 0 8pt 0; text-align: left; }
+.entry { margin-bottom: 10pt; page-break-inside: avoid; }
+.entryhead { width: 100%; -pdf-keep-with-next: true; }
+.entryhead td { vertical-align: top; padding: 0; text-align: left; width: 74%; }
+.entryhead td.right { text-align: right; width: 26%; }
+.role { font-size: 9.5pt; font-weight: bold; color: #202124; }
+.org { font-size: 9.5pt; color: #202124; }
+.right { font-size: 9.5pt; color: #555555; text-align: right; white-space: nowrap; }
+ul { margin: 4pt 0 0 0; padding-left: 13pt; }
+li { margin-bottom: 5pt; text-align: justify; }
+b { font-weight: bold; color: #14487f; }
 p { margin: 0; }
 </style>
 </head>
 <body>
 
 <h1>[YOUR_NAME]</h1>
-<div class="contact">[YOUR_LOCATION] &nbsp;&bull;&nbsp; <a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a> &nbsp;&bull;&nbsp; <a href="[YOUR_LINKEDIN_URL]">[YOUR_LINKEDIN_HANDLE]</a></div>
+<div class="contact">[YOUR_LOCATION] &nbsp;&bull;&nbsp; [YOUR_PHONE] &nbsp;&bull;&nbsp; <a href="mailto:[YOUR_EMAIL]">[YOUR_EMAIL]</a> &nbsp;&bull;&nbsp; <a href="[YOUR_LINKEDIN_URL]">[YOUR_LINKEDIN_HANDLE]</a></div>
 
-<p class="summary">[PROFILE_STATEMENT - 3-4 lines, tailored per role: what you build, the tools you use, and one measurable result. This is the most important section to customize for each application.]</p>
+<h2>PROFILE</h2>
+<p class="summary">[PROFILE_STATEMENT - 3-4 lines, tailored per role: what you build, the tools you use, and one measurable result. Bold the 3-5 terms an HR skim must catch. This is the most important section to customize for each application.]</p>
 
-<h2>Core Competencies</h2>
-<ul class="comp">
-<li><span class="label">[COMPETENCY_1]:</span> [1-2 lines, tailored to the posting's keywords.]</li>
-<li><span class="label">[COMPETENCY_2]:</span> [1-2 lines.]</li>
-<li><span class="label">[COMPETENCY_3]:</span> [1-2 lines.]</li>
-<li><span class="label">[COMPETENCY_4]:</span> [1-2 lines.]</li>
-<li><span class="label">[COMPETENCY_5]:</span> [1-2 lines.]</li>
+<h2>CORE SKILLS</h2>
+<ul>
+<li><b>[SKILL_GROUP_1]:</b> [comma-separated tools and techniques, one line, keyed to the posting]</li>
+<li><b>[SKILL_GROUP_2]:</b> [one line]</li>
+<li><b>[SKILL_GROUP_3]:</b> [one line]</li>
+<li><b>[SKILL_GROUP_4]:</b> [one line]</li>
+<li><b>[SKILL_GROUP_5]:</b> [one line]</li>
 </ul>
 
-<h2>Professional Experience</h2>
+<h2>PROFESSIONAL EXPERIENCE</h2>
 
 <div class="entry">
 <table class="entryhead"><tr>
@@ -56,10 +71,10 @@ p { margin: 0; }
 <td class="right">[LOCATION]<br>[START]&ndash;[END]</td>
 </tr></table>
 <ul>
-<li>[Most recent role: 4-5 bullets, measurable results, reframed to the target role.]</li>
-<li>[Bullet 2]</li>
-<li>[Bullet 3]</li>
-<li>[Bullet 4]</li>
+<li><b>[Lead-in label:]</b> [most recent role - 6-8 bullets, each 20-30 words, measurable results, reframed to the target role. Bold the numbers.]</li>
+<li><b>[Lead-in label:]</b> [bullet 2]</li>
+<li><b>[Lead-in label:]</b> [bullet 3]</li>
+<li><b>[Lead-in label:]</b> [bullet 4]</li>
 </ul>
 </div>
 
@@ -68,20 +83,23 @@ p { margin: 0; }
 <td><span class="role">[ROLE_TITLE]</span>, <span class="org">[ORGANIZATION]</span></td>
 <td class="right">[LOCATION]<br>[START]&ndash;[END]</td>
 </tr></table>
-<ul><li>[Previous role: 2-3 bullets.]</li></ul>
+<ul><li>[Previous role: 1-2 short bullets, or none if the title says enough.]</li></ul>
 </div>
 
-<h2>Education</h2>
+<h2>PROJECTS</h2>
+<ul>
+<li><b>[PROJECT_NAME]</b> ([context, dates]): [one or two lines, or remove this section]</li>
+</ul>
+
+<h2>EDUCATION</h2>
 <div class="entry"><table class="entryhead"><tr><td><span class="role">[DEGREE]</span>, <span class="org">[INSTITUTION]</span></td><td class="right">[LOCATION]<br>[START]&ndash;[END]</td></tr></table></div>
 
-<h2>Certifications</h2>
-<ul><li>[CERTIFICATION, or remove this section]</li></ul>
-
-<h2>Languages</h2>
-<ul><li>[LANGUAGES]</li></ul>
-
-<h2>References</h2>
-<ul><li>Available upon request.</li></ul>
+<h2>ADDITIONAL</h2>
+<ul>
+<li><b>Certification:</b> [CERTIFICATION, or remove this line]</li>
+<li><b>Languages:</b> [LANGUAGES]</li>
+<li><b>References:</b> available upon request</li>
+</ul>
 
 </body>
 </html>
