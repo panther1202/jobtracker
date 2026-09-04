@@ -83,3 +83,6 @@ upskill/*.md
 # Job tracker app: ignore build output and local state (code is tracked)
 tracker/frontend/dist/
 tracker/pending_outcomes.json
+
+# Backup copies of rendered personal documents
+*.pdf.bak

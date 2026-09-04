@@ -17,9 +17,9 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ### Identity
 - **Name:** Panth Patel
-- **Phone:** +1 732-824-1460 (use on all CVs and cover letters)
-- **Location:** Currently Vadodara, Gujarat, India; relocating to Somerset, NJ, USA. No commute/relocation constraints; job search targets US market.
-- **Location on documents:** header reads **"Relocating to Somerset, NJ, USA"**, and the Sunflower Labs role keeps its true location (Vadodara, India). A NJ header above an India-based job reads to US recruiters as an offshore candidate needing sponsorship - the relocation wording removes the contradiction without overclaiming. Do not assert US work authorization anywhere; that is Panth's to state.
+- **Phone:** +1 732-649-0368 (use on all CVs and cover letters)
+- **Location:** Somerset, NJ, USA. No commute/relocation constraints; job search targets US market.
+- **Location on documents:** header reads **"Somerset, NJ, USA"**. Panth relocated to the US in September 2026, so the plain NJ location is now simply true; the earlier "Relocating to Somerset, NJ, USA" hedge existed only to stop a NJ header above an India-based job reading as an offshore candidate, and is no longer needed. Do not assert US work authorization anywhere; that is Panth's to state.
 - **Languages:** English (fluent), Hindi (fluent), Gujarati (fluent)
 - **Status:** Employed - Software Engineer at Sunflower Labs
 - **LinkedIn headline:** "AI/Python Engineer | LLM Automation (LangChain, AWS Bedrock) | Building AI tools @ Sunflower Labs"
@@ -33,7 +33,7 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ### Professional Experience
 <!-- List your roles, most recent first -->
-- **Software Engineer** (Feb 2026 - Present) - **Sunflower Labs** (Vadodara, India; remote-eligible)
+- **Software Engineer** (Feb 2026 - Present) - **Sunflower Labs** (employer based in Vadodara, India; Panth works remotely from Somerset, NJ, USA - on documents the role location reads **"Remote (US)"**)
   - Two tracks of work: (A) applied AI / LLM tooling, (B) full-stack product engineering on a client SaaS platform. Both are current; emphasise whichever the target posting calls for (see "Positioning" below).
 
   **(A) Applied AI / LLM automation**
@@ -62,9 +62,14 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 - **QA Tester** (Aug 2020 - Dec 2020) - **Sunflower Labs** (during break between undergraduate diploma and Bachelor's)
 
 ### Independent Projects
-- **Loan Qualification Engine** (academic coursework): Python machine-learning pipeline automating real-time loan qualification decisions, comparing Logistic Regression and Random Forest classifiers. *Dates, institution, dataset and result metrics still unconfirmed - ask Panth before claiming any figure.*
+Verified against the local repositories under `C:\Users\panth\Projects` on 2026-09-04. Full detail lives in `.claude/skills/job-application-assistant/01-candidate-profile.md`.
+- **Loan Default AI Layer** (2026, in progress): AI-engineering layer over a frozen scikit-learn LogisticRegression. TypeScript deterministic decision + attribution core parity-tested against the Python pipeline; ECOA protected attributes filtered out of every LLM explanation in code, not in the prompt; nine ADRs. **Stage 1a only is built; the RAG/retrieval stage is designed but not implemented** - never describe this project as having RAG.
+- **GateKeep** (2026): Python + Streamlit LinkedIn auto-poster with a human-approval gate. Gemini 2.5 Flash drafting grounded in verified facts, banned-buzzword flagging, LinkedIn OAuth 2.0 Posts API, scheduled headless publisher, pytest suite. Confirmed working.
+- **Loan Default Prediction** (2025): Python pipeline comparing logistic regression, random forest, gradient boosting, KNN, naive Bayes and SVM on **precision, recall, F1 and ROC-AUC**; served through a **Flask** REST API. This is what the earlier "Loan Qualification Engine" note referred to; the metrics are now confirmed from the code, though dataset provenance is synthetic (see the project's own ADR-0009).
+- **Histogram** (Jan 2025): **Flask** + OpenCV web tool clustering image pixels with DBSCAN, K-means and mean shift. **Co-authored with Saumya Ramoliya** - always say "built with one collaborator", never imply solo work.
+- **Image Color-Pattern Clustering Tool** (Apr 2024 - Sep 2024, freelance): Python + OpenCV clustering tool to identify user-defined color patterns in images. Reached 70% completion before the client discontinued the engagement prior to deployment. **On CVs, state what was built and omit the completion percentage** - Panth's call (2026-08-19); it is honest to omit, but never claim it shipped. Distinct from Histogram; never merge the two.
 - **Holiday Notification Service** (academic coursework): scheduled notification engine built with FastAPI and Firebase. *Dates, institution and scope still unconfirmed.*
-- **Image Color-Pattern Clustering Tool** (Apr 2024 - Sep 2024, freelance): Python + OpenCV clustering tool to identify user-defined color patterns in images. Reached 70% completion before the client discontinued the engagement prior to deployment. **On CVs, state what was built and omit the completion percentage** - Panth's call (2026-08-19); it is honest to omit, but never claim it shipped.
+- **Not resume material:** `Projects/jobtracker` is a fork of MadsLorentzen/ai-job-search, not original work; `Projects/Project brainstorming` is an Obsidian vault; `Projects/Loan prediction` and `Projects/sample` are superseded earlier versions.
 
 ### Technical Skills
 - **Primary:** Python (advanced) - FastAPI, async SQLAlchemy 2.0 / SQLModel, Pydantic, asyncpg; LangChain, LangGraph, Hugging Face Transformers, Scikit-learn, Keras, TensorFlow, PyTorch, OpenCV
